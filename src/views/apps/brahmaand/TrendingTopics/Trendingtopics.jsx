@@ -44,10 +44,10 @@ function Trendingtopics() {
     e.preventDefault();
     axios
       .post(`http://3.7.173.138:9000/admin/addTrending`, {
-        topics: trendingTopics,
+        topics: trendingTopics.toLowerCase(),
       })
       .then((res) => {
-        console.log(res.data.message);
+        console.log(res.data.data);
         if (res.data.message == "success") {
           swal("Topics added Successfully");
         }

@@ -126,14 +126,14 @@ const navigationConfig = [
     permissions: ["admin", "editor"],
     navLink: "/app/brahmaand/leaderboard/leaderBoardList",
   },
-  {
-    id: "leaderBoard winner",
-    title: "Weekly Winner ",
-    type: "item",
-    icon: <Icon.ArrowRight size={12} />,
-    permissions: ["admin", "editor"],
-    navLink: "/app/brahmaand/leaderboard/weeklyWinner",
-  },
+  // {
+  //   id: "leaderBoard winner",
+  //   title: "Weekly Winner ",
+  //   type: "item",
+  //   icon: <Icon.ArrowRight size={12} />,
+  //   permissions: ["admin", "editor"],
+  //   navLink: "/app/brahmaand/leaderboard/weeklyWinner",
+  // },
   {
     id: "leaderBoard metors",
     title: "Update Metores ",
