@@ -162,6 +162,9 @@ const Profile = lazy(() => import("./views/pages/profile/Profile"));
 const LeaderBoardList = lazy(() =>
   import("./views/apps/brahmaand/leaderboard/LeaderBoardList")
 );
+const leaderboardmonthly = lazy(() =>
+  import("./views/apps/brahmaand/leaderboard/LeaderBoardmonthly")
+);
 const AddLeader = lazy(() =>
   import("./views/apps/brahmaand/leaderboard/AddLeader")
 );
@@ -778,6 +781,10 @@ class AppRouter extends React.Component {
             <AppRoute
               path="/app/brahmaand/leaderboard/leaderBoardList"
               component={LeaderBoardList}
+            />
+            <AppRoute
+              path="/app/brahmaand/leaderboard/leaderboardmonthly"
+              component={leaderboardmonthly}
             />
             <AppRoute
               path="/app/brahmaand/leaderboard/addLeader"

@@ -62,7 +62,10 @@ function Trendingtopics() {
       <Container style={{ height: "auto", width: "100%" }} className="card">
         <Row className="">
           <Label className="mt-2 mx-5 mb-2">
-            <h3>Add Trending Topic</h3>
+            <h3>
+              Add Trending Topic-
+              <span style={{ fontSize: "16px" }}>Single at a time</span>
+            </h3>
           </Label>
         </Row>
         <Row className="mb-2">

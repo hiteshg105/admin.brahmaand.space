@@ -180,7 +180,7 @@ class LeaderBoardList extends React.Component {
 
   async componentDidMount() {
     await axiosConfig
-      .get("/user/all_time_karma", {
+      .get("/user/karma_crrnt_month", {
         // headers: {
         //   "auth-adtoken": localStorage.getItem("auth-adtoken"),
         // },
@@ -236,7 +236,7 @@ class LeaderBoardList extends React.Component {
             <Card>
               <Row className="m-2">
                 <Col sm="6" className="tb">
-                  <h1 className="float-left">Leader Board List-All Time</h1>
+                  <h1 className="float-left">Leader Board List-Monthly</h1>
                 </Col>
                 {/* <Col style={{ marginLeft: "8rem" }}>
                                     <h5>Start Date</h5>

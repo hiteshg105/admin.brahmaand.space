@@ -107,7 +107,7 @@ const navigationConfig = [
     navLink: "/app/brahmaand/blogs/blogList",
   },
   {
-    id: "blogs",
+    id: "blog",
     title: "Comment Blog",
     type: "item",
     icon: <Icon.ArrowRight size={12} />,
@@ -120,11 +120,19 @@ const navigationConfig = [
   },
   {
     id: "leaderBoard",
-    title: "leaderboard Leaders ",
+    title: "leaderboard- All Time ",
     type: "item",
     icon: <Icon.ArrowRight size={12} />,
     permissions: ["admin", "editor"],
     navLink: "/app/brahmaand/leaderboard/leaderBoardList",
+  },
+  {
+    id: "leaderBoard monthly",
+    title: "leaderboard-Monthly ",
+    type: "item",
+    icon: <Icon.ArrowRight size={12} />,
+    permissions: ["admin", "editor"],
+    navLink: "/app/brahmaand/leaderboard/leaderboardmonthly",
   },
   // {
   //   id: "leaderBoard winner",
