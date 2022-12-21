@@ -52,7 +52,7 @@ class RegisterUserList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.username}</span>
+              <span>{params?.data?.username}</span>
             </div>
           );
         },
@@ -64,7 +64,7 @@ class RegisterUserList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.email}</span>
+              <span>{params?.data?.email}</span>
             </div>
           );
         },
@@ -78,32 +78,45 @@ class RegisterUserList extends React.Component {
           return (
             <img
               className="w-50 h-50  rounded-circle"
-              src={params.data.profileImg}
+              src={params?.data?.profileImg}
             />
           );
         },
       },
       {
-        headerName: "Current Point",
-        field: "currentpoint",
+        headerName: "Meteors",
+        field: "meteors",
         width: 180,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.email}</span>
+              <span>{params?.data?.meteors}</span>
             </div>
           );
         },
       },
       {
-        headerName: "Total Point",
-        field: "meteors",
+        headerName: "Dollar",
+        field: "creaditedAmt",
         width: 180,
 
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.meteors}</span>
+              <span>{params?.data?.creaditedAmt}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Remaining",
+        field: "remaining",
+        width: 180,
+
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <span>{params.data.remaining}</span>
             </div>
           );
         },
@@ -133,7 +146,10 @@ class RegisterUserList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
-              <Link to={`/app/brahmaand/leaderboard/edituserdata/:id`}>
+              <Link
+                key={params.data._id}
+                to={`/app/brahmaand/leaderboard/edituserdata/${params.data._id}`}
+              >
                 <button
                   className="aifillediticon btn btn-success"
                   size={30}
@@ -189,7 +205,7 @@ class RegisterUserList extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig.get("/admin/userlist").then((response) => {
+    await axiosConfig.get("/user/payoutlist").then((response) => {
       const rowData = response.data.data;
       this.setState({ rowData });
     });
@@ -243,7 +259,7 @@ class RegisterUserList extends React.Component {
                   User's Earning
                 </h1>
               </Col>
-              <Col>
+              {/* <Col>
                 <Link to={`/app/brahmaand/leaderboard/edituserdata/:id`}>
                   <button
                     className="aifillediticon btn btn-success"
@@ -253,7 +269,7 @@ class RegisterUserList extends React.Component {
                     Payout
                   </button>
                 </Link>
-              </Col>
+              </Col> */}
             </Row>
             {/* <Col className="pt-4">
                             <Route

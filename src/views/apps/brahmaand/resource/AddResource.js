@@ -77,14 +77,14 @@ function AddResource() {
     setDesc(draftToHtml(convertToRaw(editorState.getCurrentContent())));
   };
   // console.log(desc);
-  imageToBase64(cat_img) // Path to the image
-    .then((response) => {
-      setConimg(response); // "cGF0aC90by9maWxlLmpwZw=="
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error); // Logs an error if there was one
-    });
+  // imageToBase64(cat_img) // Path to the image
+  //   .then((response) => {
+  //     setConimg(response); // "cGF0aC90by9maWxlLmpwZw=="
+  //     console.log(response);
+  //   })
+  //   .catch((error) => {
+  //     console.log(error); // Logs an error if there was one
+  //   });
   const submitHandler = (e) => {
     e.preventDefault();
     console.log(
@@ -119,7 +119,7 @@ function AddResource() {
         creatorName: creatorName,
         relYear: yrName,
         comment: comment,
-        img: conimg,
+        img: cat_img,
       })
 
       .then((response) => {

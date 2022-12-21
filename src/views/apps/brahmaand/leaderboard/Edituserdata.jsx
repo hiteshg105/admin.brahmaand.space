@@ -1,10 +1,33 @@
 import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Col, Row } from "reactstrap";
 import { Route } from "react-router-dom";
+// import axiosConfig from "../../../../../src/axiosConfig.js";
+import axios from "axios";
+import swal from "sweetalert";
 
 function Edituserdata() {
+  const [dollar, setDollar] = useState("");
+  const Params = useParams();
+
+  const handleSubmitPayout = () => {
+    // e.preventDefault();
+
+    axios
+      .post(`http://3.7.173.138:9000/admin/payout/${Params.id}`, {
+        payout: dollar,
+      })
+      .then((res) => {
+        console.log(res.data.message);
+        if (res.data.message == "success") {
+          swal("Updated Successfully");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div>
       <h2 className="d-flex justify-content-center">Update dollar Payout</h2>
@@ -32,10 +55,21 @@ function Edituserdata() {
         </Col> */}
         <Col lg="4">
           <h5>Dollar value</h5>
-          <input className="form-control" type="text" />
+          <input
+            className="form-control"
+            type="number"
+            onChange={(e) => {
+              setDollar(e.target.value);
+            }}
+            value={dollar}
+          />
         </Col>
         <Col style={{ marginTop: "26px" }}>
-          <button type="button" class="btn btn-success">
+          <button
+            // type="button"
+            onClick={handleSubmitPayout}
+            class="btn btn-success"
+          >
             Update
           </button>
         </Col>

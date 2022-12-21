@@ -104,9 +104,10 @@ function Updatemetors() {
         <thead aria-colspan={1}>
           <tr>
             <th>No.</th>
+            <th>Planet image</th>
             <th>Planet Name</th>
             <th>Meteors Range</th>
-            <th>Dollar</th>
+            <th>Dollar value</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -120,7 +121,7 @@ function Updatemetors() {
                   </td>
                   <td>{data?.planet_name}</td>
                   <td>{data?.point_range}</td>
-                  <td>{data?.doller_rupees}</td>
+                  <td>${data?.doller_rupees}</td>
                   <td>
                     <Link
                       to={`/app/brahmaand/leaderboard/editplanet/${data._id}`}
