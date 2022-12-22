@@ -40,7 +40,7 @@ export default class EditUserResource extends Component {
   componentDidMount() {
     let { id } = this.props.match.params;
     axiosConfig
-      .get(`/admin/getone_reslist/${id}`, {})
+      .get(`/admin/getone_reslist/${id}`)
       .then((response) => {
         console.log(response.data.data);
         this.setState({
@@ -72,8 +72,8 @@ export default class EditUserResource extends Component {
       .post(`/admin/edit_submit_rsrc/${id}`, this.state)
       .then((response) => {
         console.log(response);
-        swal("Success!", "Submitted SuccessFully!", "Success");
-        // this.props.history.push("/app/brahmaand/resource/userResourceList");
+        swal("Success!", "Submitted Successfully!", "Success");
+        this.props.history.push("/app/brahmaand/resource/userResourceList");
       })
       .catch((error) => {
         console.log(error);
@@ -137,7 +137,7 @@ export default class EditUserResource extends Component {
                   <Button
                     className=" btn btn-danger float-right"
                     onClick={() =>
-                      history.push("/app/brahmaand/resource/resourceList")
+                      history.push("/app/brahmaand/resource/userResourceList")
                     }
                   >
                     Back

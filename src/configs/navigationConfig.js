@@ -50,7 +50,7 @@ const navigationConfig = [
   },
   {
     id: " Admin ResourceList",
-    title: "List of Promoted resource ",
+    title: "List of Promoted Resource ",
     type: "item",
     icon: <Icon.ArrowRight size={12} />,
     permissions: ["admin", "editor"],
@@ -58,7 +58,7 @@ const navigationConfig = [
   },
   {
     id: "User ResourceList",
-    title: "List of User resource   ",
+    title: "List of User Resource   ",
     type: "item",
     icon: <Icon.ArrowRight size={12} />,
     permissions: ["admin", "editor"],
