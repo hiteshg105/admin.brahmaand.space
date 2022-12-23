@@ -191,19 +191,7 @@ export default class EditUserResource extends Component {
                         onChange={this.handleChange}
                       />
                     </Col>
-                    <Col lg="6" className="mt-1">
-                      {" "}
-                      <Label style={{ fontSize: "20px" }} className="mx-2">
-                        Description :{" "}
-                      </Label>
-                      <input
-                        name="desc"
-                        type="text"
-                        value={this.state.desc}
-                        className="mx-2 py-2 form-control"
-                        onChange={this.handleChange}
-                      />
-                    </Col>
+
                     <Col lg="6" className="mt-1">
                       <Label style={{ fontSize: "20px" }} className="mx-2">
                         Format :{" "}
@@ -238,6 +226,21 @@ export default class EditUserResource extends Component {
                         type="text"
                         name="resTitle"
                         value={this.state.resTitle}
+                        className="mx-2 py-2 form-control"
+                        onChange={this.handleChange}
+                      />
+                    </Col>
+                    <Col lg="6" className="mt-1">
+                      {" "}
+                      <Label style={{ fontSize: "20px" }} className="mx-2">
+                        Description :{" "}
+                      </Label>
+                      <textarea
+                        name="desc"
+                        type="text"
+                        rows="5"
+                        cols="20"
+                        value={this.state.desc}
                         className="mx-2 py-2 form-control"
                         onChange={this.handleChange}
                       />
