@@ -84,13 +84,13 @@ class RegisterUserList extends React.Component {
         },
       },
       {
-        headerName: "Current Point",
-        field: "currentpoint",
+        headerName: "Current Meteors",
+        field: "meteors",
         width: 180,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.email}</span>
+              <span>{params.data.meteors}</span>
             </div>
           );
         },
@@ -180,6 +180,7 @@ class RegisterUserList extends React.Component {
 
   async componentDidMount() {
     await axiosConfig.get("/admin/userlist").then((response) => {
+      console.log(response);
       const rowData = response.data.data;
       this.setState({ rowData });
     });
