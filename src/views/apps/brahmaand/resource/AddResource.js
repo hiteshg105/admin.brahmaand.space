@@ -36,7 +36,7 @@ import {
 } from "react-accessible-accordion";
 
 function AddResource() {
-  const [link, setLink] = useState([]);
+  const [link, setLink] = useState("");
   const [category, setCategory] = useState("");
   const [sub_category, setSub_category] = useState("");
   const [type, setType] = useState("");
@@ -47,17 +47,17 @@ function AddResource() {
   const [creatorName, setCreatorName] = useState("");
   const [relYear, setRelYear] = useState([]);
   const [comment, setComment] = useState("");
-  // const [selectedFile, setSelectedFile] = useState("");
   const [selectedLang, setSelectedLang] = useState([]);
   const [categoryT, setCategoryT] = useState([]);
   const [sub_categoryT, setSub_categoryT] = useState([]);
   const [yrN, setYrN] = useState([]);
   const [langL, setLangL] = useState([]);
   const [yrName, setYrName] = useState([]);
-  const [cat_img, setCat_img] = useState({});
+  const [cat_img, setCat_img] = useState("");
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
-  const [sellang, setSellang] = useState();
-  const [conimg, setConimg] = useState("");
+  const [sellang, setSellang] = useState([]);
+
+  console.log(cat_img);
   const onSelect = (selectedList, selectedItem) => {
     console.log(selectedList);
     var selectItem1 = [];
@@ -67,7 +67,6 @@ function AddResource() {
     }
     console.log("aaaa", selectItem1);
     setSellang(selectItem1);
-    // console.log(sellang);
   };
 
   const onEditorStateChange = (editorState) => {
@@ -76,17 +75,63 @@ function AddResource() {
 
     setDesc(draftToHtml(convertToRaw(editorState.getCurrentContent())));
   };
-  // console.log(desc);
-  // imageToBase64(cat_img) // Path to the image
-  //   .then((response) => {
-  //     setConimg(response); // "cGF0aC90by9maWxlLmpwZw=="
-  //     console.log(response);
-  //   })
-  //   .catch((error) => {
-  //     console.log(error); // Logs an error if there was one
-  //   });
+
+  // var fileUpload = (e) => {
+  //   debugger;
+  //   const files = e.target.files;
+  //   const file = files[0];
+  //   imageToBase64(file);
+  //   imageToBase64();
+  // };
+
+  // const onLoad = (fileString) => {
+  //   const image64 = fileString.split(",");
+  //   console.log(image64[1]);
+  //   setCat_img(image64[1]);
+  //   // base64code = fileString;
+  // };
+
+  // const imageToBase64 = (file) => {
+  //   let reader = new FileReader();
+  //   reader.readAsDataURL(file);
+  //   reader.onload = () => {
+  //     onLoad(reader.result);
+  //   };
+  // };
+  // console.log(
+  //   "all data",
+  //   link,
+  //   category,
+  //   sub_category,
+  //   type,
+  //   creatorName,
+  //   resTitle,
+  //   topics,
+  //   selectedLang,
+  //   yrName,
+  //   format,
+  //   desc,
+  //   comment,
+  //   cat_img,
+  //   sellang
+  // );
   const submitHandler = (e) => {
     e.preventDefault();
+    const formdata = new FormData();
+    formdata.append("link", link);
+    formdata.append("category", category);
+    formdata.append("sub_category", sub_category);
+    formdata.append("type", type);
+    formdata.append("format", format);
+    formdata.append("language", sellang);
+    formdata.append("topics", topics);
+    formdata.append("desc", desc);
+    formdata.append("resTitle", resTitle);
+    formdata.append("creatorName", creatorName);
+    formdata.append("relYear", yrName);
+    formdata.append("comment", comment);
+    formdata.append("img", cat_img);
+
     console.log(
       "all data",
       link,
@@ -100,27 +145,12 @@ function AddResource() {
       format,
       desc,
       comment,
-      conimg,
-      sellang,
-      desc
+      cat_img,
+      sellang
     );
 
     axios
-      .post(`http://3.7.173.138:9000/admin/admin_Sub_resrc`, {
-        link: link,
-        category: category,
-        sub_category: sub_category,
-        type: type,
-        format: format,
-        language: sellang,
-        topics: topics,
-        desc: desc,
-        resTitle: resTitle,
-        creatorName: creatorName,
-        relYear: yrName,
-        comment: comment,
-        img: cat_img,
-      })
+      .post(`http://3.7.173.138:9000/admin/admin_Sub_resrc`, formdata)
 
       .then((response) => {
         console.log(response.data.data);
@@ -129,22 +159,13 @@ function AddResource() {
       })
       .catch((error) => {
         console.log(error);
+        swal("Someting went wrong");
       });
   };
   function onRemove(selectedList, removedItem) {
     console.log(selectedList);
   }
 
-  const onChangeHandler = (event) => {
-    // setCat_img({
-    //   picturePreview: URL.createObjectURL(event.target.files[0]),
-
-    //   pictureAsFile: event.target.files[0],
-    // });
-    setCat_img(event.target.files[0]);
-  };
-
-  console.log(cat_img.picturePreview);
   useEffect(() => {
     listbycategorydata();
     getallcategorydata();
@@ -247,7 +268,10 @@ function AddResource() {
             </Col>
           </Row>
           <CardBody>
-            <Form className="m-1" onSubmit={submitHandler}>
+            <Form
+              className="m-1"
+              // onSubmit={submitHandler}
+            >
               <Row>
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <FormGroup>
@@ -344,16 +368,23 @@ function AddResource() {
                       <option>Select Format</option>
                       <option value="Video">Video</option>
                       <option value="Text">Text</option>
-                      <option value="Video & Text">Video & Text</option>
+                      {/* <option value="Video & Text">Video & Text</option> */}
                     </CustomInput>
                   </FormGroup>
                 </Col>
                 <Col lg="6" md="6" className="mb-2">
                   <Label>Upload Image</Label>
-                  <CustomInput
+                  {/* <CustomInput
                     type="file"
                     //   multiple
                     onChange={onChangeHandler}
+                  /> */}
+                  <input
+                    type="file"
+                    // style={{ background: "#F1F1F1" }}
+                    className="form-control imageuserupload"
+                    onChange={(e) => setCat_img(e.target.files[0])}
+                    // onChange={fileUpload}
                   />
                 </Col>
                 <Col lg="6" md="6" className="mb-2 languageselect">
@@ -531,7 +562,7 @@ function AddResource() {
                   <Button
                     onClick={submitHandler}
                     color="primary"
-                    type="submit"
+                    // type="submit"
                     className="mr-1 mb-1"
                   >
                     Add Your Content

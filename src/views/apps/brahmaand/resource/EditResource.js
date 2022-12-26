@@ -29,6 +29,8 @@ export default class EditResource extends Component {
       format: "",
       resTitle: "",
       status: "",
+      aprv_status: "",
+      img: "",
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -51,6 +53,7 @@ export default class EditResource extends Component {
           type: response.data.data.type,
           format: response.data.data.format,
           resTitle: response.data.data.resTitle,
+          img: response.data.data.img,
         });
       })
       .catch((error) => {
@@ -69,7 +72,7 @@ export default class EditResource extends Component {
     let { id } = this.props.match.params;
 
     axiosConfig
-      .post(`/admin/edit_promotion/${id}`, this.state)
+      .post(`/admin/edit_promotion/${id}`, this.state.aprv_status)
       .then((response) => {
         console.log(response);
         swal("Success!", "Submitted Successfully!", "Success");
@@ -224,6 +227,31 @@ export default class EditResource extends Component {
                         className="mx-2 py-2 form-control"
                         onChange={this.handleChange}
                       />
+                    </Col>
+                    <Col lg="6" className="mt-1">
+                      {" "}
+                      <Label style={{ fontSize: "20px" }} className="mx-2">
+                        Image :{" "}
+                      </Label>
+                      <Row>
+                        <img
+                          className="mx-3"
+                          height={160}
+                          src={this.state.img}
+                          alt="uploaded Image"
+                        />
+                      </Row>
+                      <Row>
+                        <textarea
+                          type="file"
+                          rows="5"
+                          cols="20"
+                          name="img"
+                          value={this.state.img}
+                          className="mx-2 mt-2 py-2 form-control"
+                          onChange={this.handleChange}
+                        />
+                      </Row>
                     </Col>
                     <Col lg="6" className="mt-1">
                       {" "}

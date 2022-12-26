@@ -29,6 +29,7 @@ export default class EditUserResource extends Component {
       format: "",
       resTitle: "",
       aprv_status: "",
+      img: "",
       // userData: {},
     };
     this.handleChange = this.handleChange.bind(this);
@@ -43,6 +44,7 @@ export default class EditUserResource extends Component {
       .get(`/admin/getone_reslist/${id}`)
       .then((response) => {
         console.log(response.data.data);
+        console.log(response.data.data.img);
         this.setState({
           // userData: response.data.data,
           desc: response.data.data.desc,
@@ -52,6 +54,7 @@ export default class EditUserResource extends Component {
           type: response.data.data.type,
           format: response.data.data.format,
           resTitle: response.data.data.resTitle,
+          img: response.data.data.img,
         });
       })
       .catch((error) => {
@@ -229,6 +232,34 @@ export default class EditUserResource extends Component {
                         className="mx-2 py-2 form-control"
                         onChange={this.handleChange}
                       />
+                    </Col>
+                    <Col lg="6" className="mt-1">
+                      {" "}
+                      <Label style={{ fontSize: "20px" }} className="mx-2">
+                        Image :{" "}
+                      </Label>
+                      <Row>
+                        <img
+                          className="mx-3"
+                          height={160}
+                          src={this.state.img}
+                          alt="uploaded Image"
+                        />
+                      </Row>
+                      <Row>
+                        <textarea
+                          type="text"
+                          rows="5"
+                          cols="20"
+                          name="img"
+                          value={this.state.img}
+                          className="mx-2 mt-2 py-2 form-control"
+                          onChange={this.handleChange}
+                        />
+                        <span className="mx-3 mt-2" style={{ color: "red" }}>
+                          * Enter base64 image code for change image
+                        </span>
+                      </Row>
                     </Col>
                     <Col lg="6" className="mt-1">
                       {" "}
