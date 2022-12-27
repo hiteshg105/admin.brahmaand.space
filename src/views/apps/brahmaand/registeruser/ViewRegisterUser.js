@@ -12,6 +12,7 @@ import {
 import { history } from "../../../../history";
 import "../../../../assets/scss/pages/app-ecommerce-shop.scss";
 import axiosConfig from "../../../../axiosConfig";
+import { Route } from "react-router-dom";
 class ViewRegisterUser extends React.Component {
   constructor(props) {
     super(props);
@@ -66,14 +67,20 @@ class ViewRegisterUser extends React.Component {
                 </h1>
               </Col>
               <Col>
-                <Button
-                  className=" btn btn-danger float-right"
-                  onClick={() =>
-                    history.push("/app/brahmaand/registeruser/registerUserList")
-                  }
-                >
-                  Back
-                </Button>
+                <Route
+                  render={({ history }) => (
+                    <Button
+                      className=" btn btn-danger float-right"
+                      onClick={() =>
+                        history.push(
+                          "/app/brahmaand/registeruser/registerUserList"
+                        )
+                      }
+                    >
+                      Back
+                    </Button>
+                  )}
+                />
               </Col>
             </Row>
             <CardBody className="pb-0">
@@ -88,11 +95,11 @@ class ViewRegisterUser extends React.Component {
                 </Col>
                 <Col md="12" sm="12" className="mb-2">
                   <h4>Current Point:</h4>
-                  <span> {this.state.data.email}</span>
+                  <span> {this.state.data.meteors}</span>
                 </Col>
                 <Col md="12" sm="12" className="mb-2">
                   <h4>Total Point:</h4>
-                  <span> {this.state.data.email}</span>
+                  <span> {this.state.data.meteors}</span>
                 </Col>
                 <Col md="12" sm="12" className="mb-2">
                   <h4>Image: </h4>
@@ -100,10 +107,11 @@ class ViewRegisterUser extends React.Component {
                   <Media className="mt-md-1 mt-0" left>
                     {this.state.data?.profileImg?.map((i) => (
                       <img
+                        width="300px"
+                        height="300px"
                         className="border-black m-0"
                         src={i}
                         alt="user avatar"
-                        height="400"
                       />
                     ))}
                   </Media>
