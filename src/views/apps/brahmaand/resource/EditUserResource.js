@@ -90,9 +90,15 @@ export default class EditUserResource extends Component {
     axiosConfig
       .post(`/admin/approve_submit_resrc/${id}`, this.state)
       .then((response) => {
-        console.log(response);
-        swal("Success!", "Submitted SuccessFully!", "success");
-        this.props.history.push("/app/brahmaand/resource/userResourceList");
+        console.log(response.data.data.aprv_status);
+        if (response.data.data.aprv_status == "Deactive") {
+          swal("Submitted Successfully!", "Deactived");
+          this.props.history.push("/app/brahmaand/resource/userResourceList");
+        }
+        if (response.data.data.aprv_status == "Active") {
+          swal("Submitted Successfully!", "Activated");
+          this.props.history.push("/app/brahmaand/resource/userResourceList");
+        }
       })
       .catch((error) => {
         console.log(error);

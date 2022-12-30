@@ -123,7 +123,9 @@ class RegisterUserList extends React.Component {
             <div className="badge badge-pill badge-warning">
               {params.data.status}
             </div>
-          ) : null;
+          ) : (
+            <div className="badge badge-pill badge-warning">Deactive</div>
+          );
         },
       },
       {

@@ -72,7 +72,7 @@ export default class EditResource extends Component {
     let { id } = this.props.match.params;
 
     axiosConfig
-      .post(`/admin/edit_promotion/${id}`, this.state.aprv_status)
+      .post(`/admin/edit_promotion/${id}`, this.state)
       .then((response) => {
         console.log(response);
         swal("Success!", "Submitted Successfully!", "Success");
@@ -91,11 +91,16 @@ export default class EditResource extends Component {
       .post(`/admin/approve_submit_resrc/${id}`, this.state)
       .then((response) => {
         console.log(response);
-        console.log(response.data.data);
+        if (response.data.data.status == "Deactive") {
+          swal("Submitted Successfully!", "Deactived");
+          this.props.history.push("/app/brahmaand/resource/resourceList");
+        }
+        if (response.data.data.status == "Active") {
+          swal("Submitted Successfully!", "Actived");
+          this.props.history.push("/app/brahmaand/resource/resourceList");
+        }
         // swal("Success!", "Submitted SuccessFull!", "success");
         //   this.props.history.push("/app/brahmaand/resource/resourceList");
-        swal("Success!", "Submitted Successfully!", "Success");
-        this.props.history.push("/app/brahmaand/resource/resourceList");
       })
       .catch((error) => {
         console.log(error);
