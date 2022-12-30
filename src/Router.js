@@ -598,7 +598,7 @@ const AppRoute = connect(mapStateToProps)(RouteConfig);
 class AppRouter extends React.Component {
   componentDidMount() {
     let data = localStorage.getItem("ad-token");
-    console.log("token data", data);
+    // console.log("token data", data);
     sessionStorage.clear();
     if (data === undefined || data === null) {
       // history.push("/#/pages/login")

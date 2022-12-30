@@ -24,7 +24,7 @@ const NavbarUser = () => {
 
   const tokenVerify = () => {
     let data = localStorage.getItem("ad-token");
-    console.log("token data", data);
+    // console.log("token data", data);
     sessionStorage.clear();
     if (data === undefined || data === null) {
       window.location.replace("/#/pages/login");
@@ -38,10 +38,9 @@ const NavbarUser = () => {
         //axiosConfig.get(`/dlt_startup/${id}`)
         // let userId = localStorage.getItem("userId");
         const data = await axiosConfig.get(
-
           `/admin/viewoneadmin/6343ec888e7a479c70336029`
         );
-        console.log(data.data.data);
+        // console.log(data.data.data);
         setAdminimg(data.data.data);
       } catch (error) {
         console.log("SomeThing Wrong");

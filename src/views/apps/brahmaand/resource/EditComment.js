@@ -44,9 +44,10 @@ export default class EditComment extends Component {
     axiosConfig
       .post(`/admin/admin_edit_coment/${id}`, this.state)
       .then((response) => {
-        console.log(response);
-        swal("Success!", "Submitted SuccessFull!", "success");
-        this.props.history.push("/app/brahmaand/resource/resourceComment");
+        if (response.data.message == "success") {
+          swal("Success!", "Submitted Successfully!", "Success");
+          this.props.history.push("/app/brahmaand/resource/resourceComment");
+        }
       })
       .catch((error) => {
         console.log(error);

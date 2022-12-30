@@ -13,7 +13,7 @@ import {
 } from "reactstrap";
 import axiosConfig from "../../../../axiosConfig";
 // import { history } from "../../../history";
-import { Route } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 import swal from "sweetalert";
 import Accordion from "react-bootstrap/Accordion";
 import { FiArrowDown } from "react-icons/fi";
@@ -44,7 +44,7 @@ export default class EditUserResource extends Component {
       .get(`/admin/getone_reslist/${id}`)
       .then((response) => {
         console.log(response.data.data);
-        console.log(response.data.data.img);
+        // console.log(response.data.data.img);
         this.setState({
           // userData: response.data.data,
           desc: response.data.data.desc,
@@ -54,6 +54,8 @@ export default class EditUserResource extends Component {
           type: response.data.data.type,
           format: response.data.data.format,
           resTitle: response.data.data.resTitle,
+          relYear: response.data.data.relYear,
+          language: response.data.data.language,
           img: response.data.data.img,
         });
       })
@@ -259,6 +261,12 @@ export default class EditUserResource extends Component {
                         <span className="mx-3 mt-2" style={{ color: "red" }}>
                           * Enter base64 image code for change image
                         </span>
+                        <Row>
+                          <div className="mx-4">click to convert base64-</div>
+                          <a href="https://www.base64-image.de">
+                            https://www.base64-image.de
+                          </a>
+                        </Row>
                       </Row>
                     </Col>
                     <Col lg="6" className="mt-1">
