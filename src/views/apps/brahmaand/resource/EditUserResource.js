@@ -162,7 +162,7 @@ export default class EditUserResource extends Component {
               <Row>
                 <Col lg="12" md="12" sm="12">
                   <h2 className=" mb-2 d-flex justify-content-center">
-                    <b>Update here</b>
+                    {/* <b>Update here</b> */}
                   </h2>
                   <Row className="">
                     <Col lg="6" className="mt-1">

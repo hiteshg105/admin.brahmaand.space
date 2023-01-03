@@ -91,30 +91,6 @@ function AddResource() {
   //   // base64code = fileString;
   // };
 
-  // const imageToBase64 = (file) => {
-  //   let reader = new FileReader();
-  //   reader.readAsDataURL(file);
-  //   reader.onload = () => {
-  //     onLoad(reader.result);
-  //   };
-  // };
-  // console.log(
-  //   "all data",
-  //   link,
-  //   category,
-  //   sub_category,
-  //   type,
-  //   creatorName,
-  //   resTitle,
-  //   topics,
-  //   selectedLang,
-  //   yrName,
-  //   format,
-  //   desc,
-  //   comment,
-  //   cat_img,
-  //   sellang
-  // );
   const submitHandler = (e) => {
     e.preventDefault();
     const formdata = new FormData();
