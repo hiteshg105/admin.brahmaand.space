@@ -101,6 +101,9 @@ const AddResource = lazy(() =>
 const EditResource = lazy(() =>
   import("./views/apps/brahmaand/resource/EditResource")
 );
+const EditResourcet = lazy(() =>
+  import("./views/apps/brahmaand/resource/EditResourcet")
+);
 const ViewResource = lazy(() =>
   import("./views/apps/brahmaand/resource/ViewResource")
 );
@@ -692,6 +695,10 @@ class AppRouter extends React.Component {
             <AppRoute
               path="/app/brahmaand/resource/editResource/:id"
               component={EditResource}
+            />
+            <AppRoute
+              path="/app/brahmaand/resource/editResourcet/:id"
+              component={EditResourcet}
             />
             <AppRoute
               path="/app/brahmaand/resource/viewResource/:id"
