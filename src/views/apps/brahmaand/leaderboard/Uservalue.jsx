@@ -128,14 +128,10 @@ class RegisterUserList extends React.Component {
         filter: true,
         width: 180,
         cellRendererFramework: (params) => {
-          return params.value == "Active" ? (
-            <div className="badge badge-pill badge-success">
-              {params.data.status}
-            </div>
-          ) : params.value == "Deactive" ? (
-            <div className="badge badge-pill badge-warning">
-              {params.data.status}
-            </div>
+          return params.value == "true" ? (
+            <div className="badge badge-pill badge-success">Active</div>
+          ) : params.value == "false" ? (
+            <div className="badge badge-pill badge-warning">Deactive</div>
           ) : null;
         },
       },
@@ -148,7 +144,7 @@ class RegisterUserList extends React.Component {
             <div className="actions cursor-pointer">
               <Link
                 key={params.data._id}
-                to={`/app/brahmaand/leaderboard/edituserdata/${params.data._id}`}
+                to={`/app/brahmaand/leaderboard/edituserdata/${params.data?._id}`}
               >
                 <button
                   className="aifillediticon btn btn-success"
@@ -207,6 +203,7 @@ class RegisterUserList extends React.Component {
   async componentDidMount() {
     await axiosConfig.get("/user/payoutlist").then((response) => {
       const rowData = response.data.data;
+      console.log(rowData);
       this.setState({ rowData });
     });
   }

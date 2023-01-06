@@ -79,6 +79,36 @@ class LeaderBoardList extends React.Component {
           );
         },
       },
+      {
+        headerName: "UserImage",
+        field: "file",
+        filter: true,
+        width: 150,
+        // pinned: window.innerWidth > 992 ? "left" : false,
+        cellRendererFramework: (params) => {
+          return (
+            <img
+              alt="userImg"
+              className=" d-flex align-items-center cursor-pointer w-50 h-50 rounded"
+              src={params.data?.profileImg}
+            />
+          );
+        },
+      },
+      {
+        headerName: "Planet Image",
+        field: "planetImg",
+        // filter: true,
+        width: 150,
+        // pinned: window.innerWidth > 992 ? "left" : false,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <img height="40px" src={params.data?.planetImg}></img>
+            </div>
+          );
+        },
+      },
 
       {
         headerName: "Current Month Point",
@@ -103,40 +133,12 @@ class LeaderBoardList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data?.userid?.meteors}</span>
+              <span>{params.data?.meteors}</span>
             </div>
           );
         },
       },
-      {
-        headerName: "UserImage",
-        field: "file",
-        filter: true,
-        width: 150,
-        // pinned: window.innerWidth > 992 ? "left" : false,
-        cellRendererFramework: (params) => {
-          return (
-            <img
-              className=" d-flex align-items-center cursor-pointer w-50 h-50 rounded"
-              src={params.data?.profileImg}
-            />
-          );
-        },
-      },
-      {
-        headerName: "Planet Image",
-        field: "planetImg",
-        // filter: true,
-        width: 150,
-        // pinned: window.innerWidth > 992 ? "left" : false,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="d-flex align-items-center cursor-pointer">
-              <img height="40px" src={params.data?.planetImg}></img>
-            </div>
-          );
-        },
-      },
+
       // {
       //   headerName: "creaditedAmt",
       //   field: "creaditedAmt",
