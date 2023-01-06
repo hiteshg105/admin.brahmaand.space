@@ -54,13 +54,27 @@ class LeaderBoardList extends React.Component {
       {
         headerName: "Name",
         field: "username",
-        // filter: true,
+        filter: true,
         width: 150,
         // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data?.userid?.username}</span>
+              <span>{params.data?.username}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Email",
+        field: "email",
+        filter: true,
+        width: 150,
+        // pinned: window.innerWidth > 992 ? "left" : false,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <span>{params.data?.email}</span>
             </div>
           );
         },
@@ -95,48 +109,48 @@ class LeaderBoardList extends React.Component {
         },
       },
       {
-        headerName: "Image",
+        headerName: "UserImage",
         field: "file",
-        // filter: true,
+        filter: true,
         width: 150,
         // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
             <img
               className=" d-flex align-items-center cursor-pointer w-50 h-50 rounded"
-              src={params.data?.userid?.profileImg}
+              src={params.data?.profileImg}
             />
           );
         },
       },
-      //   {
-      //     headerName: "Planet Position",
-      //     field: "desc",
-      //     // filter: true,
-      //     width: 150,
-      //     // pinned: window.innerWidth > 992 ? "left" : false,
-      //     cellRendererFramework: (params) => {
-      //       return (
-      //         <div className="d-flex align-items-center cursor-pointer">
-      //           <span>{params.data.desc}</span>
-      //         </div>
-      //       );
-      //     },
+      {
+        headerName: "Planet Image",
+        field: "planetImg",
+        // filter: true,
+        width: 150,
+        // pinned: window.innerWidth > 992 ? "left" : false,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <img height="40px" src={params.data?.planetImg}></img>
+            </div>
+          );
+        },
+      },
+      // {
+      //   headerName: "creaditedAmt",
+      //   field: "creaditedAmt",
+      //   // filter: true,
+      //   width: 150,
+      //   // pinned: window.innerWidth > 992 ? "left" : false,
+      //   cellRendererFramework: (params) => {
+      //     return (
+      //       <div className="d-flex align-items-center cursor-pointer">
+      //         <span>{params.data?.creaditedAmt}</span>
+      //       </div>
+      //     );
       //   },
-      //   {
-      //     headerName: "Amount",
-      //     field: "desc",
-      //     // filter: true,
-      //     width: 150,
-      //     // pinned: window.innerWidth > 992 ? "left" : false,
-      //     cellRendererFramework: (params) => {
-      //       return (
-      //         <div className="d-flex align-items-center cursor-pointer">
-      //           <span>{params.data.desc}</span>
-      //         </div>
-      //       );
-      //     },
-      //   },
+      // },
 
       //   {
       //     headerName: "Actions",

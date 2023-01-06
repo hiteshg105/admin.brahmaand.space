@@ -61,7 +61,7 @@ function AddResource() {
     console.log(selectedList);
     var selectItem1 = [];
 
-    for (var i = 0; i < selectedList.length; i++) {
+    for (let i = 0; i < selectedList.length; i++) {
       selectItem1.push(selectedList[i]._id);
     }
     console.log("aaaa", selectItem1);

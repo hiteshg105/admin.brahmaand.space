@@ -11,10 +11,12 @@ import {
   Breadcrumb,
   BreadcrumbItem,
 } from "reactstrap";
+import "./edituser.css";
 import axiosConfig from "../../../../axiosConfig";
 // import { history } from "../../../history";
 import { Route } from "react-router-dom";
 import swal from "sweetalert";
+import Multiselect from "multiselect-react-dropdown";
 import Accordion from "react-bootstrap/Accordion";
 import { FiArrowDown } from "react-icons/fi";
 export default class EditResource extends Component {
@@ -51,6 +53,18 @@ export default class EditResource extends Component {
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
+
+  onSelect(selectedList, selectedItem) {
+    console.log(selectedList);
+    var selectItem1 = [];
+
+    for (var i = 0; i < selectedList.length; i++) {
+      selectItem1.push(selectedList[i]._id);
+    }
+    console.log("aaaa", selectItem1);
+    this.setState({ language: selectItem1 });
+  }
+  onRemove(selectedList, removedItem) {}
 
   componentDidUpdate() {
     // console.log(this.state.category);
@@ -296,7 +310,7 @@ export default class EditResource extends Component {
                     </Col>
                     <Col lg="6" className="mt-1">
                       <Label style={{ fontSize: "20px" }} className="mx-1">
-                        language : -
+                        Language : -
                         <span className="mx-2" style={{ color: "green" }}>
                           {this.state.languageshow?.map((languageshow) => (
                             <span key={languageshow?._id}>
@@ -305,6 +319,15 @@ export default class EditResource extends Component {
                           ))}
                         </span>
                       </Label>
+                      {/* <Multiselect
+                        className="mx-2"
+                        // name="language"
+                        options={this.state.getalllang} // Options to display in the dropdown
+                        // selectedValues={this.state.languageshow} // Preselected value to persist in dropdown
+                        onSelect={this.onSelect} // Function will trigger on select event
+                        onRemove={this.onRemove} // Function will trigger on remove event
+                        displayValue="language" // Property name to display in the dropdown options
+                      /> */}
 
                       <select
                         name="language"
