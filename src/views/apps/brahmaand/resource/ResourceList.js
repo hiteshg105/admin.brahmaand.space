@@ -182,13 +182,15 @@ class ResourceList extends React.Component {
         filter: true,
         width: 110,
         cellRendererFramework: (params) => {
-          return params.value == "Active" ? (
+          return params.status == "Active" ? (
             <div className="badge badge-pill badge-success">
+              {/* Active */}
               {params.data.status}
             </div>
           ) : params.value == "Deactive" ? (
             <div className="badge badge-pill badge-warning">
               {params.data.status}
+              {/* Deactive */}
             </div>
           ) : null;
         },

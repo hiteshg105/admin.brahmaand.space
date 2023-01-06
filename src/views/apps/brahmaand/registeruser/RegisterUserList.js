@@ -115,14 +115,10 @@ class RegisterUserList extends React.Component {
         filter: true,
         width: 180,
         cellRendererFramework: (params) => {
-          return params.value == "Active" ? (
-            <div className="badge badge-pill badge-success">
-              {params.data.status}
-            </div>
-          ) : params.value == "Deactive" ? (
-            <div className="badge badge-pill badge-warning">
-              {params.data.status}
-            </div>
+          return params.value == "true" ? (
+            <div className="badge badge-pill badge-success">Active</div>
+          ) : params.value == "false" ? (
+            <div className="badge badge-pill badge-warning">Deactive</div>
           ) : (
             <div className="badge badge-pill badge-warning">Deactive</div>
           );

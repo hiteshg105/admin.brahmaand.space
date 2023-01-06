@@ -57,7 +57,6 @@ function AddResource() {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [sellang, setSellang] = useState([]);
 
-  console.log(cat_img);
   const onSelect = (selectedList, selectedItem) => {
     console.log(selectedList);
     var selectItem1 = [];
@@ -102,39 +101,63 @@ function AddResource() {
     formdata.append("language", sellang);
     formdata.append("topics", topics);
     formdata.append("desc", desc);
-    formdata.append("resTitle", resTitle);
-    formdata.append("creatorName", creatorName);
-    formdata.append("relYear", yrName);
+    if (resTitle !== "") {
+      formdata.append("resTitle", resTitle);
+    }
+    if (creatorName !== "") {
+      formdata.append("creatorName", creatorName);
+    }
+
+    if (yrName !== "") {
+      formdata.append("relYear", yrName);
+    }
+
     formdata.append("comment", comment);
     formdata.append("img", cat_img);
 
-    console.log(
-      "all data",
-      link,
-      category,
-      sub_category,
-      type,
-      creatorName,
-      topics,
-      selectedLang,
-      yrName,
-      format,
-      desc,
-      comment,
-      cat_img,
-      sellang
-    );
+    // console.log(
+    //   "all data",
+    //   link,
+    //   category,
+    //   sub_category,
+    //   type,
+    //   creatorName,
+    //   topics,
+    //   selectedLang,
+    //   yrName,
+    //   format,
+    //   desc,
+    //   comment,
+    //   cat_img,
+    //   sellang
+    // );
 
     axios
       .post(`http://3.7.173.138:9000/admin/admin_Sub_resrc`, formdata)
 
       .then((response) => {
-        console.log(response.data.data);
-        swal("Success!", "Submitted SuccessFully!", "success");
-        // history.push("/app/brahmaand/resource/resourceList");
+        console.log(response.data);
+        if (response.data.message == "success") {
+          swal("Success!", "Submitted SuccessFully!", "success");
+          // history.push("/app/brahmaand/resource/resourceList");
+          setLink("");
+          setCategory("");
+          setSub_category("");
+          setType("");
+          setFormat("");
+          setTopics("");
+          setDesc("");
+          setRelYear("");
+          setCreatorName("");
+          setResTitle("");
+          setComment("");
+          setSellang("");
+          setYrName("");
+          setCat_img("");
+        }
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response.data);
         swal("Someting went wrong");
       });
   };
@@ -169,7 +192,7 @@ function AddResource() {
     axiosConfig
       .get("/admin/getallCategory")
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setCategoryT(response.data.data);
       })
       .catch((error) => {
@@ -180,7 +203,7 @@ function AddResource() {
     axiosConfig
       .get("/user/allYear")
       .then((response) => {
-        console.log(response.data.data);
+        // console.log(response.data.data);
         setYrN(response.data.data);
       })
       .catch((error) => {
@@ -192,7 +215,7 @@ function AddResource() {
     axiosConfig
       .get("/user/allLang")
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setLangL(response.data.data);
       })
       .catch((error) => {
@@ -365,6 +388,24 @@ function AddResource() {
                 </Col>
                 <Col lg="6" md="6" className="mb-2 languageselect">
                   <FormGroup>
+                    <Label>Release Year</Label>
+                    <CustomInput
+                      type="select"
+                      name="relYear"
+                      value={yrName}
+                      onChange={(e) => setYrName(e.target.value)}
+                    >
+                      <option>select Year</option>
+                      {yrN?.map((allYear) => (
+                        <option value={allYear?._id} key={allYear?._id}>
+                          {allYear?.yrName}
+                        </option>
+                      ))}
+                    </CustomInput>
+                  </FormGroup>
+                </Col>
+                <Col lg="6" md="6" className="mb-2 languageselect">
+                  <FormGroup>
                     <Label>Language</Label>
                     {/* <CustomInput
                       type="select"
@@ -444,7 +485,7 @@ function AddResource() {
                               onChange={(e) => setResTitle(e.target.value)}
                             />
                           </FormGroup>
-                          <FormGroup>
+                          {/* <FormGroup>
                             <Label>Release Year</Label>
                             <CustomInput
                               type="select"
@@ -459,7 +500,7 @@ function AddResource() {
                                 </option>
                               ))}
                             </CustomInput>
-                          </FormGroup>
+                          </FormGroup> */}
                           <FormGroup>
                             <Label>Descripition</Label>
                             <Editor

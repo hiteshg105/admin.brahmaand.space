@@ -57,9 +57,10 @@ function AddResource() {
   const [cat_img, setCat_img] = useState("");
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [sellang, setSellang] = useState([]);
+  const [img, setimg] = useState("");
+  const [status, setStatus] = useState("");
   const Params = useParams();
-  console.log(Params.id);
-
+  console.log(status);
   const onSelect = (selectedList, selectedItem) => {
     console.log(selectedList);
     var selectItem1 = [];
@@ -74,43 +75,75 @@ function AddResource() {
   //     axiosConfig.get(`/admin/getone_reslist/${id}`){}
   //   };
   const onEditorStateChange = (editorState) => {
-    // editorState.preventDefault();
     setEditorState(editorState);
-
     setDesc(draftToHtml(convertToRaw(editorState.getCurrentContent())));
   };
 
-  // var fileUpload = (e) => {
-  //   debugger;
-  //   const files = e.target.files;
-  //   const file = files[0];
-  //   imageToBase64(file);
-  //   imageToBase64();
-  // };
+  var fileUpload = (e) => {
+    const files = e.target.files;
+    const file = files[0];
+    imageToBase64(file);
+    imageToBase64();
+  };
+  const imageToBase64 = (file) => {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      onLoad(reader.result);
+    };
+  };
+  const onLoad = (fileString) => {
+    const image64 = fileString.split(",");
 
-  // const onLoad = (fileString) => {
-  //   const image64 = fileString.split(",");
-  //   console.log(image64[1]);
-  //   setCat_img(image64[1]);
-  //   // base64code = fileString;
-  // };
+    setCat_img(image64[1]);
+    // base64code = fileString;
+  };
+
+  useEffect(() => {
+    getOnelistResoure();
+  }, []);
+
+  const getOnelistResoure = () => {
+    axios
+      .get(`http://3.7.173.138:9000/admin/getone_reslist/${Params.id}`)
+      .then((res) => {
+        console.log(res.data.data);
+        setComment(res.data.data.comment);
+        setCategory(res.data.data.category.title);
+        setType(res.data.data.type);
+        setSub_category(res.data.data.sub_category.title);
+        setTopics(res.data.data.topics);
+        setResTitle(res.data.data.resTitle);
+        setRelYear(res.data.data.relYear);
+        setLangL(res.data.data.language);
+        setimg(res.data.data.img);
+        setLink(res.data.data.link);
+        setFormat(res.data.data.format);
+        setDesc(res.data.data.desc);
+        setCreatorName(res.data.data.creatorName);
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const formdata = new FormData();
-    formdata.append("link", link);
-    formdata.append("category", category);
-    formdata.append("sub_category", sub_category);
-    formdata.append("type", type);
-    formdata.append("format", format);
-    formdata.append("language", sellang);
-    formdata.append("topics", topics);
-    formdata.append("desc", desc);
-    formdata.append("resTitle", resTitle);
-    formdata.append("creatorName", creatorName);
-    formdata.append("relYear", yrName);
-    formdata.append("comment", comment);
-    formdata.append("img", cat_img);
+    console.log("object");
+    // const formdata = new FormData();
+    // formdata.append("link", link);
+    // formdata.append("category", category);
+    // formdata.append("sub_category", sub_category);
+    // formdata.append("type", type);
+    // formdata.append("format", format);
+    // formdata.append("language", sellang);
+    // formdata.append("topics", topics);
+    // formdata.append("desc", desc);
+    // formdata.append("resTitle", resTitle);
+    // formdata.append("creatorName", creatorName);
+    // formdata.append("relYear", yrName);
+    // formdata.append("comment", comment);
+    // formdata.append("img", cat_img);
 
     console.log(
       "all data",
@@ -120,26 +153,63 @@ function AddResource() {
       type,
       creatorName,
       topics,
-      selectedLang,
       yrName,
       format,
       desc,
       comment,
-      cat_img,
-      sellang
+      cat_img
+      // sellang
     );
 
-    axios
-      .post(`http://3.7.173.138:9000/admin/admin_Sub_resrc`, formdata)
+    // axios
+    //   .post(`http://3.7.173.138:9000/admin/edit_promotion/${Params.id}`, {
+    //     link: link,
+    //     category: category,
+    //     sub_category: sub_category,
+    //     type: type,
+    //     format: format,
+    //     language: sellang,
+    //     topics: topics,
+    //     desc: desc,
+    //     resTitle: resTitle,
+    //     creatorName: creatorName,
+    //     relYear: relYear,
+    //     comment: comment,
+    //     img: cat_img,
+    //   })
+    //   .then((response) => {
+    //     console.log(response.data.data);
+    //     swal("Success!", "Submitted SuccessFully!", "success");
 
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     swal("Someting went wrong");
+    //   });
+  };
+
+  const handlestautschange = (e) => {
+    e.preventDefault();
+    console.log(status);
+    axios
+      .post(`http://3.7.173.138:9000/admin/approve_submit_resrc/${Params.id}`, {
+        aprv_status: status,
+      })
       .then((response) => {
-        console.log(response.data.data);
-        swal("Success!", "Submitted SuccessFully!", "success");
-        // history.push("/app/brahmaand/resource/resourceList");
+        console.log(response);
+        if (response.data.data.aprv_status == "Deactive") {
+          swal("Submitted Successfully!", "Deactived");
+          this.props.history.push("/app/brahmaand/resource/resourceList");
+        }
+        if (response.data.data.aprv_status == "Active") {
+          swal("Submitted Successfully!", "Actived");
+          this.props.history.push("/app/brahmaand/resource/resourceList");
+        }
+        // swal("Success!", "Submitted SuccessFull!", "success");
+        //   this.props.history.push("/app/brahmaand/resource/resourceList");
       })
       .catch((error) => {
         console.log(error);
-        swal("Someting went wrong");
       });
   };
   function onRemove(selectedList, removedItem) {
@@ -220,7 +290,7 @@ function AddResource() {
                 >
                   Resource List
                 </BreadcrumbItem>
-                <BreadcrumbItem active>AddResource</BreadcrumbItem>
+                <BreadcrumbItem active>Edit Resource</BreadcrumbItem>
               </Breadcrumb>
             </div>
           </Col>
@@ -229,7 +299,7 @@ function AddResource() {
           <Row className="m-2">
             <Col>
               <h1 col-sm-6 className="float-left">
-                Add Resource
+                Edit Resource
               </h1>
             </Col>
             <Col>
@@ -255,7 +325,7 @@ function AddResource() {
               <Row>
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <FormGroup>
-                    <Label> Creator Name</Label>
+                    <Label> Creator Name :</Label>
                     <Input
                       type="text"
                       name="creatorName"
@@ -285,7 +355,7 @@ function AddResource() {
                       value={category}
                       onChange={(e) => setCategory(e.target.value)}
                     >
-                      <option>select Category</option>
+                      <option>{category}</option>
                       {categoryT?.map((allCategory) => (
                         <option value={allCategory?._id} key={allCategory?._id}>
                           {allCategory?.title}
@@ -303,7 +373,7 @@ function AddResource() {
                       value={sub_category}
                       onChange={(e) => setSub_category(e.target.value)}
                     >
-                      <option>select SubCategory</option>
+                      <option>{sub_category}</option>
                       {sub_categoryT?.map((allSubCategory) => (
                         <option
                           value={allSubCategory?._id}
@@ -363,45 +433,24 @@ function AddResource() {
                     type="file"
                     // style={{ background: "#F1F1F1" }}
                     className="form-control imageuserupload"
-                    onChange={(e) => setCat_img(e.target.files[0])}
+                    onChange={fileUpload}
                     // onChange={fileUpload}
                   />
                 </Col>
-                <Col lg="6" md="6" className="mb-2 languageselect">
-                  <FormGroup>
-                    <Label>Language</Label>
-                    {/* <CustomInput
-                      type="select"
-                      name="language"
-                      value={this.state.language}
-                      onChange={this.changeHandler}
-                    >
-                      <option>select Language</option>
-                      {this.state.langL?.map((allLang) => (
-                        <option value={allLang?._id} key={allLang?._id}>
-                          {allLang?.language}
-                        </option>
-                      ))}
-                    </CustomInput> */}
+                {/* <Col lg="6" md="6" className="mb-2 languageselect">
+                  <FormGroup> */}
+                {/* <Label>Language</Label> */}
 
-                    {/* <Select */}
-                    {/* isMulti
-                                            type="select"
-                                            classNamePrefix="select"
-                                            options={this.state.langL}
-                                            style={this.style}
-                                
-                                        /> */}
-                    <Multiselect
+                {/* <Multiselect
                       placeholder="Select language"
                       options={langL}
                       // selectedValues={selectedValues}
                       onSelect={onSelect}
                       onRemove={onRemove}
                       displayValue="language"
-                    />
-                  </FormGroup>
-                </Col>
+                    /> */}
+                {/* </FormGroup>
+                </Col> */}
                 <Col lg="6" md="6" className="mb-2">
                   <FormGroup>
                     <Label>Topic</Label>
@@ -414,6 +463,7 @@ function AddResource() {
                     />
                   </FormGroup>
                 </Col>
+
                 <Col lg="6" md="6" className="mb-2">
                   <Label>Optional</Label>
                   <Accordion>
@@ -466,61 +516,70 @@ function AddResource() {
                           </FormGroup>
                           <FormGroup>
                             <Label>Descripition</Label>
-                            <Editor
+                            {/* <Editor
                               toolbarClassName="demo-toolbar-absolute"
                               wrapperClassName="demo-wrapper"
                               editorClassName="demo-editor"
                               editorState={editorState}
                               onEditorStateChange={onEditorStateChange}
-                              // toolbar={{
-                              //     options: [
-                              //         "inline",
-                              //         "blockType",
-                              //         "fontSize",
-                              //         "fontFamily",
+                              toolbar={{
+                                options: [
+                                  "inline",
+                                  "blockType",
+                                  "fontSize",
+                                  "fontFamily",
 
-                              //         "image",
-
-                              //     ],
-                              //     inline: {
-                              //         options: [
-                              //             "bold",
-                              //             "italic",
-                              //             "underline",
-                              //             "strikethrough",
-                              //             "monospace",
-                              //         ],
-                              //         bold: {
-                              //             className: "bordered-option-classname",
-                              //         },
-                              //         italic: {
-                              //             className: "bordered-option-classname",
-                              //         },
-                              //         underline: {
-                              //             className: "bordered-option-classname",
-                              //         },
-                              //         strikethrough: {
-                              //             className: "bordered-option-classname",
-                              //         },
-                              //         code: {
-                              //             className: "bordered-option-classname",
-                              //         },
-                              //     },
-                              //     blockType: {
-                              //         className: "bordered-option-classname",
-                              //     },
-                              //     fontSize: {
-                              //         className: "bordered-option-classname",
-                              //     },
-                              //     fontFamily: {
-                              //         className: "bordered-option-classname",
-                              //     },
-                              //     image: {
-                              //         className: "bordered-option-classname"
-                              //     },
-
-                              // }}
-                            />
+                                  "image",
+                                ],
+                                inline: {
+                                  options: [
+                                    "bold",
+                                    "italic",
+                                    "underline",
+                                    "strikethrough",
+                                    "monospace",
+                                  ],
+                                  bold: {
+                                    className: "bordered-option-classname",
+                                  },
+                                  italic: {
+                                    className: "bordered-option-classname",
+                                  },
+                                  underline: {
+                                    className: "bordered-option-classname",
+                                  },
+                                  strikethrough: {
+                                    className: "bordered-option-classname",
+                                  },
+                                  code: {
+                                    className: "bordered-option-classname",
+                                  },
+                                },
+                                blockType: {
+                                  className: "bordered-option-classname",
+                                },
+                                fontSize: {
+                                  className: "bordered-option-classname",
+                                },
+                                fontFamily: {
+                                  className: "bordered-option-classname",
+                                },
+                                image: {
+                                  className: "bordered-option-classname",
+                                },
+                              }}
+                            /> */}
+                            <textarea
+                              id="w3review"
+                              name="w3review"
+                              rows="6"
+                              cols="50"
+                              className="form-control"
+                              value={desc}
+                              onChange={(e) => {
+                                setDesc(e.target.value);
+                              }}
+                            ></textarea>
                           </FormGroup>
                           <FormGroup>
                             <Label>Comments</Label>
@@ -537,19 +596,67 @@ function AddResource() {
                   </Accordion>
                 </Col>
               </Row>
+              <Col lg="6" md="6" className="mb-2">
+                <FormGroup>
+                  <Label>image</Label>
+                  <img
+                    className="mx-3"
+                    height={230}
+                    width={250}
+                    src={img}
+                  ></img>
+                </FormGroup>
+              </Col>
               <Row>
                 <Col>
                   <Button
                     onClick={submitHandler}
                     color="primary"
-                    // type="submit"
                     className="mr-1 mb-1"
                   >
-                    Add Your Content
+                    Update Content
                   </Button>
                 </Col>
               </Row>
             </Form>
+            <Row>
+              <Col lg="6" md="6" sm="6" className="mb-2 mt-1">
+                <Label className="mb-1">
+                  <h4>Status</h4>
+                </Label>
+                <div
+                  className="form-label-group"
+                  // onChange={changeHandler1}
+                >
+                  <input
+                    style={{ marginRight: "3px" }}
+                    type="radio"
+                    name="status"
+                    onChange={() => {
+                      setStatus("Active");
+                    }}
+                  />
+                  <span style={{ marginRight: "20px" }}>Active</span>
+
+                  <input
+                    style={{ marginRight: "3px" }}
+                    type="radio"
+                    name="status"
+                    onChange={() => {
+                      setStatus("Deactive");
+                    }}
+                  />
+                  <span style={{ marginRight: "3px" }}>Deactive</span>
+                </div>
+                <Button.Ripple
+                  color="primary"
+                  onClick={handlestautschange}
+                  className="mr-2 mb-1 mx-2"
+                >
+                  Update
+                </Button.Ripple>
+              </Col>
+            </Row>
           </CardBody>
         </Card>
       </div>

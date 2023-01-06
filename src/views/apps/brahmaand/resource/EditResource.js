@@ -24,63 +24,76 @@ export default class EditResource extends Component {
       desc: "",
       link: "",
       comment: "",
+      creatorName: "",
       topics: [],
       type: "",
       format: "",
-      resTitle: "",
       language: [],
+      languageshow: [],
+      relYearshow: "",
       relYear: [],
       category: "",
+      categoryshow: "",
+      resTitle: "",
       sub_category: "",
+      sub_categoryshow: "",
       status: "",
       aprv_status: "",
       img: "",
-      creatorName: "",
       getallcat: [],
       getallsub: [],
+      getrelYear: [],
+      getalllang: [],
     };
     this.handleChange = this.handleChange.bind(this);
   }
-  componentDidUpdate() {
-    console.log(this.state.category);
-    const subcat = this.state.category;
 
-    // if (subcat) {
-    //   axiosConfig
-    //     .get(`/admin/listbycategory/${subcat}`)
-    //     .then((response) => {
-    //       console.log(response.data.data);
-    //       this.setState({ getallsub: response.data.data });
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    // }
-  }
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+  }
+
+  componentDidUpdate() {
+    // console.log(this.state.category);
+    const subcat = this.state.category;
+
+    if (subcat) {
+      axiosConfig
+        .get(`/admin/listbycategory/${subcat}`)
+        .then((response) => {
+          console.log(response.data.data);
+          this.setState({ getallsub: response.data.data });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }
   componentDidMount() {
     let { id } = this.props.match.params;
     axiosConfig
       .get(`/admin/getone_reslist/${id}`)
       .then((response) => {
-        console.log(response.data.data);
+        console.log(response.data.data.language);
         this.setState({
           // userData: response.data.data,
           desc: response.data.data.desc,
           link: response.data.data.link,
           comment: response.data.data.comment,
+          creatorName: response.data.data.creatorName,
           topics: response.data.data.topics,
           type: response.data.data.type,
           format: response.data.data.format,
           resTitle: response.data.data.resTitle,
+          languageshow: response.data.data.language,
+          // languageshow: response.data.data.language,
           language: response.data.data.language,
-          relYear: response.data.data.relYear,
-          category: response.data.data.category.title,
-          sub_category: response.data.data.sub_category.title,
+          relYearshow: response.data.data.relYear[0]?.yrName,
+          relYear: response.data.data.relYear[0]?._id,
           img: response.data.data.img,
-          creatorName: response.data.data.creatorName,
+          categoryshow: response.data.data.category.title,
+          category: response.data.data.category._id,
+          sub_categoryshow: response.data.data.sub_category.title,
+          sub_category: response.data.data.sub_category._id,
         });
       })
       .catch((error) => {
@@ -91,6 +104,24 @@ export default class EditResource extends Component {
       .then((response) => {
         console.log(response.data.data);
         this.setState({ getallcat: response.data.data });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    axiosConfig
+      .get("/user/allYear")
+      .then((response) => {
+        console.log(response.data.data);
+        this.setState({ getrelYear: response.data.data });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    axiosConfig
+      .get("/user/allLang")
+      .then((response) => {
+        console.log(response.data.data);
+        this.setState({ getalllang: response.data.data });
       })
       .catch((error) => {
         console.log(error);
@@ -111,11 +142,12 @@ export default class EditResource extends Component {
       .post(`/admin/edit_promotion/${id}`, this.state)
       .then((response) => {
         console.log(response);
-        swal("Success!", "Submitted Successfully!", "Success");
-        this.props.history.push("/app/brahmaand/resource/resourceList");
+
+        swal("Submitted Successfully!", "Success");
+        // this.props.history.push("/app/brahmaand/resource/resourceList");
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response.data);
       });
   };
 
@@ -193,18 +225,21 @@ export default class EditResource extends Component {
                     <b>Update here</b>
                   </h2>
                   <Row className="">
-                    {/* <Col lg="6" className="mt-1">
+                    <Col lg="6" className="mt-1">
                       <Label style={{ fontSize: "20px" }} className="mx-1">
-                        Catogory :
+                        Category :-{" "}
+                        <span style={{ color: "green" }}>
+                          {this.state.categoryshow}
+                        </span>
                       </Label>
-                     
                       <select
                         name="category"
-                        value={this.state.category}
-                        className="mx-2  form-control"
+                        placeholder={this.state.categoryshow}
+                        // value={this.state.category}
+                        className="mx-2 form-control"
                         onChange={this.handleChange}
                       >
-                        <option>{this.state.category}</option>
+                        <option>{this.state.categoryshow}</option>
                         {this.state.getallcat?.map((allCategory) => (
                           <option
                             value={allCategory?._id}
@@ -217,16 +252,18 @@ export default class EditResource extends Component {
                     </Col>
                     <Col lg="6" className="mt-1">
                       <Label style={{ fontSize: "20px" }} className="mx-1">
-                        Sub-Catogory :
+                        Sub_category :-{" "}
+                        <span style={{ color: "green" }}>
+                          {this.state.sub_categoryshow}
+                        </span>
                       </Label>
-                     
                       <select
                         name="sub_category"
-                        value={this.state.sub_category}
+                        placeholder={this.state.sub_categoryshow}
                         className="mx-2  form-control"
                         onChange={this.handleChange}
                       >
-                        <option>{this.state.sub_category}</option>
+                        <option>{this.state.sub_categoryshow}</option>
                         {this.state.getallsub?.map((allCategor) => (
                           <option value={allCategor?._id} key={allCategor?._id}>
                             {allCategor?.title}
@@ -236,31 +273,61 @@ export default class EditResource extends Component {
                     </Col>
                     <Col lg="6" className="mt-1">
                       <Label style={{ fontSize: "20px" }} className="mx-1">
-                        Release-Year :
+                        Rel-Year : -
+                        <span style={{ color: "green" }}>
+                          {this.state.relYearshow}
+                        </span>
                       </Label>
-                      <input
-                        type="text"
+
+                      <select
                         name="relYear"
-                        value={this.state.relYear}
-                        className="mx-2 py-2 form-control"
+                        placeholder={this.state.relYearshow}
+                        className="mx-2 form-control"
                         onChange={this.handleChange}
-                      />
+                      >
+                        <option>{this.state.relYearshow}</option>
+                        {this.state.getrelYear?.map((relYear) => (
+                          <option value={relYear?._id} key={relYear?._id}>
+                            {relYear?.yrName}
+                          </option>
+                        ))}
+                      </select>
                     </Col>
                     <Col lg="6" className="mt-1">
                       <Label style={{ fontSize: "20px" }} className="mx-1">
-                        Language :
+                        language : -
+                        <span className="mx-2" style={{ color: "green" }}>
+                          {this.state.languageshow?.map((languageshow) => (
+                            <span key={languageshow?._id}>
+                              {languageshow?.language}{" "}
+                            </span>
+                          ))}
+                        </span>
                       </Label>
-                      <input
-                        type="text"
+
+                      <select
                         name="language"
-                        value={this.state.language}
-                        className="mx-2 py-2 form-control"
+                        placeholder={this.state.languageshow?.map(
+                          (languageshow) => (
+                            <span key={languageshow?._id}>
+                              {languageshow?.language}{" "}
+                            </span>
+                          )
+                        )}
+                        className="mx-2 form-control"
                         onChange={this.handleChange}
-                      />
-                    </Col> */}
+                      >
+                        <option>{this.state.languageshow[0]?.language}</option>
+                        {this.state.getalllang?.map((getalllang) => (
+                          <option value={getalllang?._id} key={getalllang?._id}>
+                            {getalllang?.language}
+                          </option>
+                        ))}
+                      </select>
+                    </Col>
                     <Col lg="6" className="mt-1">
                       <Label style={{ fontSize: "20px" }} className="mx-1">
-                        creatorName:
+                        CreatorName :
                       </Label>
                       <input
                         type="text"
@@ -285,7 +352,7 @@ export default class EditResource extends Component {
                     <Col lg="6" className="mt-1">
                       {" "}
                       <Label style={{ fontSize: "20px" }} className="mx-2">
-                        Topic :{" "}
+                        Topic :
                       </Label>
                       <input
                         type="text"
@@ -297,53 +364,37 @@ export default class EditResource extends Component {
                     </Col>
                     <Col lg="6" className="mt-1">
                       <Label style={{ fontSize: "20px" }} className="mx-2">
-                        Type :{" "}
+                        Type :-{this.state.type}
                       </Label>
-                      {/* <input
-                        name="type"
-                        value={this.state.type}
-                        type="text"
-                        className="mx-2 py-2 form-control"
-                        onChange={this.handleChange}
-                      /> */}
                       <select
                         name="type"
                         value={this.state.type}
                         className="mx-2  form-control"
                         onChange={this.handleChange}
                       >
-                        <option>{this.state.type}</option>
-                        <option>Free</option>
-                        <option>Paid</option>
+                        <option className="mb-1 mt-1">{this.state.type}</option>
+                        <option className="mb-1 mt-1">Free</option>
+                        <option className="mb-1 mt-1">Paid</option>
                       </select>
                     </Col>
 
                     <Col lg="6" className="mt-1">
                       <Label style={{ fontSize: "20px" }} className="mx-2">
-                        Format :{" "}
+                        Format :{this.state.format}
                       </Label>
-                      {/* <input
-                        type="text"
-                        name="format"
-                        value={this.state.format}
-                        className="mx-2 py-2 form-control"
-                        onChange={this.handleChange}
-                      /> */}
                       <select
                         name="format"
                         value={this.state.format}
                         className="mx-2  form-control"
                         onChange={this.handleChange}
                       >
-                        <option>{this.state.format}</option>
-                        <option>Video</option>
-                        <option>Text</option>
-                        <option>Video & Text</option>
+                        <option className="mb-1 mt-1">
+                          {this.state.format}
+                        </option>
+                        <option className="mb-1 mt-1">Video</option>
+                        <option className="mb-1 mt-1">Text</option>
+                        {/* <option>Video & Text</option> */}
                       </select>
-                      {/* <option>Video</option>
-                        <option>Text</option>
-                        <option>Video & Text</option>
-                      </input> */}
                     </Col>
                     <Col lg="6" className="mt-1">
                       {" "}
@@ -393,14 +444,15 @@ export default class EditResource extends Component {
                         Image :{" "}
                       </Label>
                       <Row>
-                        <img
-                          className="mx-3"
-                          height={160}
-                          src={this.state.img}
-                          alt="uploaded Image"
-                        />
-                      </Row>
-                      <Row>
+                        <Row>
+                          <img
+                            style={{ borderRadius: "15px" }}
+                            className="mx-3"
+                            height={160}
+                            src={this.state.img}
+                            alt="uploaded Image"
+                          />
+                        </Row>
                         <textarea
                           type="file"
                           rows="5"
