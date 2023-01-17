@@ -228,14 +228,19 @@ export default class EditBlog extends Component {
                 <Col lg="6" md="6" sm="6" className="mb-2 mt-2">
                   <Label>Thumnail Image</Label>
                   <img
-                    width={250}
+                    className="mx-2"
+                    width={200}
                     style={{ borderRadius: "12px" }}
                     src={this.state.blogImg}
                   />
                 </Col>
                 <Col lg="6" md="6" sm="6" className="mb-2 mt-2">
                   <Label>Posted By Image</Label>
-                  <img width={100} src={this.state.posted_by_img} />
+                  <img
+                    className="mx-2"
+                    width={100}
+                    src={this.state.posted_by_img}
+                  />
                 </Col>
               </Row>
               <Row>
@@ -249,6 +254,7 @@ export default class EditBlog extends Component {
                       onChange={this.changeHandler1}
                     >
                       <input
+                        defaultChecked
                         style={{ marginRight: "3px" }}
                         type="radio"
                         name="status"
