@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import HtmlParser from "react-html-parser";
 import {
   Card,
   CardBody,
@@ -22,10 +23,12 @@ export default class EditBlog extends Component {
     this.state = {
       blog_title: "",
       blogImg: "",
+      posted_by_img: "",
       posted_by: "",
       desc: "",
       blog_type: "",
       selectedFile: null,
+      selectedFile1: null,
       selectedName: "",
       status: "",
     };
@@ -35,11 +38,16 @@ export default class EditBlog extends Component {
     this.setState({ selectedName: event.target.files[0].name });
     console.log(event.target.files[0]);
   };
-  onChangeHandler = (event) => {
-    this.setState({ selectedFile: event.target.files });
+  onChangeHandler1 = (event) => {
+    this.setState({ selectedFile1: event.target.files[0] });
     this.setState({ selectedName: event.target.files.name });
-    console.log(event.target.files);
+    console.log(event.target.files[0]);
   };
+  // onChangeHandler = (event) => {
+  //   this.setState({ selectedFile: event.target.files });
+  //   this.setState({ selectedName: event.target.files.name });
+  //   console.log(event.target.files);
+  // };
   changeHandler1 = (e) => {
     this.setState({ status: e.target.value });
   };
@@ -51,7 +59,7 @@ export default class EditBlog extends Component {
   componentDidMount() {
     let { id } = this.props.match.params;
     axiosConfig
-      .get(`/admin/viewoneBlog/${id}`, {})
+      .get(`/admin/viewoneBlog/${id}`)
       .then((response) => {
         console.log(response);
         this.setState({
@@ -60,6 +68,7 @@ export default class EditBlog extends Component {
           desc: response.data.data.desc,
           blog_type: response.data.data.blog_type,
           blogImg: response.data.data.blogImg,
+          posted_by_img: response.data.data.posted_by_img,
           status: response.data.data.status,
         });
       })
@@ -70,29 +79,37 @@ export default class EditBlog extends Component {
   submitHandler = (e) => {
     e.preventDefault();
     let { id } = this.props.match.params;
+    debugger;
+
     const data = new FormData();
     data.append("blog_title", this.state.blog_title);
     data.append("posted_by", this.state.posted_by);
     data.append("desc", this.state.desc);
     data.append("blog_type", this.state.blog_type);
     data.append("status", this.state.status);
-    for (const file of this.state.selectedFile) {
-      if (this.state.selectedFile !== null) {
-        data.append("blogImg", file, file.name);
-      }
+    // for (const file of this.state.selectedFile) {
+    if (this.state.selectedFile !== "") {
+      data.append("blogImg", this.state.selectedFile);
     }
-    for (var value of data.values()) {
-      console.log(value);
+    if (this.state.selectedFile1 !== "") {
+      data.append("posted_by_img", this.state.selectedFile1);
     }
-    for (var key of data.keys()) {
-      console.log(key);
-    }
+
+    // for (var value of data.values()) {
+    //   console.log(value);
+    // }
+    // for (var key of data.keys()) {
+    //   console.log(key);
+    // }
+
     axiosConfig
-      .post(`/admin/editBlog/${id}`, data)
+      .post(`admin/editBlog/${id}`, data)
       .then((response) => {
         console.log(response);
-        swal("Success!", "Submitted SuccessFull!", "success");
-        this.props.history.push("/app/brahmaand/blogs/blogList");
+        if (response.data.message == "success") {
+          swal("Success!", "Submitted SuccessFull!", "success");
+          this.props.history.push("/app/brahmaand/blogs/blogList");
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -163,17 +180,7 @@ export default class EditBlog extends Component {
                     onChange={this.changeHandler}
                   ></Input>
                 </Col>
-                <Col lg="6" md="6" sm="6" className="mb-2">
-                  <Label>Descripiton</Label>
-                  <Input
-                    required
-                    type="text"
-                    name="desc"
-                    placeholder=""
-                    value={this.state.desc}
-                    onChange={this.changeHandler}
-                  ></Input>
-                </Col>
+
                 <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label>Thumnail Image</Label>
                   <CustomInput
@@ -182,6 +189,15 @@ export default class EditBlog extends Component {
                     onChange={this.onChangeHandler}
                   />
                 </Col>
+                <Col lg="6" md="6" sm="6" className="mb-2">
+                  <Label>Posted by Image</Label>
+                  <CustomInput
+                    type="file"
+                    //   multiple
+                    onChange={this.onChangeHandler1}
+                  />
+                </Col>
+
                 <Col lg="6" md="6" className="mb-2">
                   <Label for="exampleSelect"> Blog Type</Label>
                   <Input
@@ -195,6 +211,31 @@ export default class EditBlog extends Component {
                     <option value="Recommended">Recommended</option>
                     <option value="Popular">Popular</option>
                   </Input>
+                </Col>
+                <Col lg="6" md="6" sm="6" className="mb-2 ">
+                  <Label>Descripiton</Label>
+                  <textarea
+                    required
+                    type="text"
+                    name="desc"
+                    rows={6}
+                    className="form-control"
+                    placeholder=""
+                    value={this.state.desc}
+                    onChange={this.changeHandler}
+                  ></textarea>
+                </Col>
+                <Col lg="6" md="6" sm="6" className="mb-2 mt-2">
+                  <Label>Thumnail Image</Label>
+                  <img
+                    width={250}
+                    style={{ borderRadius: "12px" }}
+                    src={this.state.blogImg}
+                  />
+                </Col>
+                <Col lg="6" md="6" sm="6" className="mb-2 mt-2">
+                  <Label>Posted By Image</Label>
+                  <img width={100} src={this.state.posted_by_img} />
                 </Col>
               </Row>
               <Row>

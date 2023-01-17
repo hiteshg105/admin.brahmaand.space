@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Component } from "react";
+import facts from "../../../../images/facts.jpg";
 import {
   Card,
   CardBody,
@@ -113,7 +114,11 @@ function AddResource() {
     }
 
     formdata.append("comment", comment);
-    formdata.append("img", cat_img);
+    if (cat_img !== "") {
+      formdata.append("img", cat_img);
+    } else {
+      formdata.append("img", facts);
+    }
 
     // console.log(
     //   "all data",
