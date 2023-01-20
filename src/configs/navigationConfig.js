@@ -70,7 +70,7 @@ const navigationConfig = [
   },
   {
     id: "ResourceComment",
-    title: "Resource Commented  ",
+    title: "Resource Comment  ",
     type: "item",
     icon: <Icon.ArrowRight size={12} />,
     permissions: ["admin", "editor"],
