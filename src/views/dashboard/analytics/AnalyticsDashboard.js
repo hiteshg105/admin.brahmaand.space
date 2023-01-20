@@ -1,11 +1,20 @@
 import React from "react";
 import { Row, Col, Card, CardTitle, CardText } from "reactstrap";
 import SalesCard from "./SalesCard";
+import { FiUsers } from "react-icons/fi";
+import { GrResources } from "react-icons/gr";
+import { BiCategory } from "react-icons/bi";
+import { CiDatabase } from "react-icons/ci";
+import { FaPalfed } from "react-icons/fa";
+import { HiOutlineCurrencyRupee } from "react-icons/hi";
+import { RiNumbersFill } from "react-icons/ri";
+import { SiMicrosoftpowerpoint } from "react-icons/si";
+import { MdOutlineCategory } from "react-icons/md";
 import axiosConfig from "../../../axiosConfig";
 import "../../../assets/scss/pages/dashboard-analytics.scss";
 
 class AnalyticsDashboard extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
       basicplanearning: {},
@@ -15,8 +24,7 @@ class AnalyticsDashboard extends React.Component {
       user: {},
       freeresrc: {},
       subresrc: {},
-      paidresrc: {}
-
+      paidresrc: {},
     };
   }
   componentDidMount() {
@@ -83,22 +91,32 @@ class AnalyticsDashboard extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
-        <Col lg="12" md="12">
-        </Col>
+      <React.Fragment size={25}>
+        <Col lg="12" md="12"></Col>
         <Row className="match-height">
-          <Col lg="4" md="12" >
+          <Col lg="4" md="12">
             <Card
               className="gt"
               body
               inverse
-              style={{ borderColor: "white", background: '#D3D3D3', padding: '2.4rem' }}
+              style={{
+                borderColor: "white",
+                background: "#D3D3D3",
+                padding: "2.4rem",
+              }}
             >
-              <CardTitle className="mb-1" tag="h4" style={{ color: "black", textAlign: 'center' }}>
-                Total no of user
+              <CardTitle
+                className="mb-1"
+                tag="h4"
+                style={{ color: "black", textAlign: "center" }}
+              >
+                <FiUsers /> Total no of user
               </CardTitle>
 
-              <CardText tag="h3" style={{ color: "black", textAlign: 'center' }}>
+              <CardText
+                tag="h3"
+                style={{ color: "black", textAlign: "center" }}
+              >
                 {this.state.user.data}
               </CardText>
             </Card>
@@ -108,13 +126,24 @@ class AnalyticsDashboard extends React.Component {
               className="gt-1"
               body
               inverse
-              style={{ borderColor: "white", background: '#00FFFF', padding: '2.4rem' }}
+              style={{
+                borderColor: "white",
+                background: "#00FFFF",
+                padding: "2.4rem",
+              }}
             >
-              <CardTitle className="mb-1" tag="h4" style={{ color: "black", textAlign: 'center' }}>
-                Total no of resources
+              <CardTitle
+                className="mb-1"
+                tag="h4"
+                style={{ color: "black", textAlign: "center" }}
+              >
+                <GrResources size={25} /> Total no of resources
               </CardTitle>
 
-              <CardText tag="h3" style={{ color: "black", textAlign: 'center' }}>
+              <CardText
+                tag="h3"
+                style={{ color: "black", textAlign: "center" }}
+              >
                 {this.state.subresrc.data}
               </CardText>
             </Card>
@@ -124,13 +153,24 @@ class AnalyticsDashboard extends React.Component {
               className="gt-2"
               body
               inverse
-              style={{ borderColor: "white", background: '#999900', padding: '2.4rem' }}
+              style={{
+                borderColor: "white",
+                background: "#999900",
+                padding: "2.4rem",
+              }}
             >
-              <CardTitle className="mb-1" tag="h4" style={{ color: "black", textAlign: 'center' }}>
-                Total no of category
+              <CardTitle
+                className="mb-1"
+                tag="h4"
+                style={{ color: "black", textAlign: "center" }}
+              >
+                <BiCategory size={25} /> Total no of category
               </CardTitle>
 
-              <CardText tag="h3" style={{ color: "black", textAlign: 'center' }}>
+              <CardText
+                tag="h3"
+                style={{ color: "black", textAlign: "center" }}
+              >
                 {this.state.category.data}
               </CardText>
             </Card>
@@ -140,12 +180,23 @@ class AnalyticsDashboard extends React.Component {
               className="gt-3"
               body
               inverse
-              style={{ borderColor: "white", background: '#3399FF', padding: '2.4rem' }}
+              style={{
+                borderColor: "white",
+                background: "#3399FF",
+                padding: "2.4rem",
+              }}
             >
-              <CardTitle className="mb-1" tag="h4" style={{ color: "black", textAlign: 'center' }}>
-                Total no of subcategory
+              <CardTitle
+                className="mb-1"
+                tag="h4"
+                style={{ color: "black", textAlign: "center" }}
+              >
+                <MdOutlineCategory size={25} /> Total no of subcategory
               </CardTitle>
-              <CardText tag="h3" style={{ color: "black", textAlign: 'center' }}>
+              <CardText
+                tag="h3"
+                style={{ color: "black", textAlign: "center" }}
+              >
                 {this.state.subcategory.data}
               </CardText>
             </Card>
@@ -155,12 +206,23 @@ class AnalyticsDashboard extends React.Component {
               className="gt-4"
               body
               inverse
-              style={{ borderColor: "white", background: '#FFFF33', padding: '2.4rem' }}
+              style={{
+                borderColor: "white",
+                background: "#FFFF33",
+                padding: "2.4rem",
+              }}
             >
-              <CardTitle className="mb-1" tag="h4" style={{ color: "black", textAlign: 'center' }}>
-                Total no of current points
+              <CardTitle
+                className="mb-1"
+                tag="h4"
+                style={{ color: "black", textAlign: "center" }}
+              >
+                <RiNumbersFill size={25} /> Total no of current points
               </CardTitle>
-              <CardText tag="h3" style={{ color: "black", textAlign: 'center' }}>
+              <CardText
+                tag="h3"
+                style={{ color: "black", textAlign: "center" }}
+              >
                 {this.state.freeusers.data}
               </CardText>
             </Card>
@@ -170,12 +232,23 @@ class AnalyticsDashboard extends React.Component {
               className="gt-4"
               body
               inverse
-              style={{ borderColor: "white", background: '#FF0033', padding: '2.4rem' }}
+              style={{
+                borderColor: "white",
+                background: "#FF0033",
+                padding: "2.4rem",
+              }}
             >
-              <CardTitle className="mb-1" tag="h4" style={{ color: "black", textAlign: 'center' }}>
-                Total no of all time points
+              <CardTitle
+                className="mb-1"
+                tag="h4"
+                style={{ color: "black", textAlign: "center" }}
+              >
+                <SiMicrosoftpowerpoint size={25} /> Total no of all time points
               </CardTitle>
-              <CardText tag="h3" style={{ color: "black", textAlign: 'center' }}>
+              <CardText
+                tag="h3"
+                style={{ color: "black", textAlign: "center" }}
+              >
                 {this.state.freeusers.data}
               </CardText>
             </Card>
@@ -185,13 +258,24 @@ class AnalyticsDashboard extends React.Component {
               className="gt-5"
               body
               inverse
-              style={{ borderColor: "white", background: '#F08080', padding: '2.4rem' }}
+              style={{
+                borderColor: "white",
+                background: "#F08080",
+                padding: "2.4rem",
+              }}
             >
-              <CardTitle className="mb-1" tag="h4" style={{ color: "black", textAlign: 'center' }}>
-                Total no of paid resource
+              <CardTitle
+                className="mb-1"
+                tag="h4"
+                style={{ color: "black", textAlign: "center" }}
+              >
+                <HiOutlineCurrencyRupee size={25} /> Total no of Paid resource
               </CardTitle>
 
-              <CardText tag="h3" style={{ color: "black", textAlign: 'center' }}>
+              <CardText
+                tag="h3"
+                style={{ color: "black", textAlign: "center" }}
+              >
                 {this.state.paidresrc.data}
               </CardText>
             </Card>
@@ -202,13 +286,25 @@ class AnalyticsDashboard extends React.Component {
               className="gt-6"
               body
               inverse
-              style={{ borderColor: "white", background: '#FF8C00', padding: '2.4rem' }}
+              style={{
+                borderColor: "white",
+                background: "#FF8C00",
+                padding: "2.4rem",
+              }}
             >
-              <CardTitle className="mb-1" tag="h4" style={{ color: "black", textAlign: 'center' }}>
+              <CardTitle
+                className="mb-1"
+                tag="h4"
+                style={{ color: "black", textAlign: "center" }}
+              >
+                <CiDatabase size={25} />
                 Total no of free resource
               </CardTitle>
 
-              <CardText tag="h3" style={{ color: "black", textAlign: 'center' }}>
+              <CardText
+                tag="h3"
+                style={{ color: "black", textAlign: "center" }}
+              >
                 {this.state.freeresrc.data}
               </CardText>
             </Card>
@@ -218,13 +314,24 @@ class AnalyticsDashboard extends React.Component {
               className="gt-7"
               body
               inverse
-              style={{ borderColor: "white", background: '#B266FF', padding: '2.4rem' }}
+              style={{
+                borderColor: "white",
+                background: "#B266FF",
+                padding: "2.4rem",
+              }}
             >
-              <CardTitle className="mb-1" tag="h4" style={{ color: "black", textAlign: 'center' }}>
-                Total no of Promotion
+              <CardTitle
+                className="mb-1"
+                tag="h4"
+                style={{ color: "black", textAlign: "center" }}
+              >
+                <FaPalfed size={25} /> Total no of Promotion
               </CardTitle>
 
-              <CardText tag="h3" style={{ color: "black", textAlign: 'center' }}>
+              <CardText
+                tag="h3"
+                style={{ color: "black", textAlign: "center" }}
+              >
                 {this.state.basicplanearning.Earning}
               </CardText>
             </Card>

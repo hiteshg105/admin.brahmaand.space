@@ -10,11 +10,11 @@ const navigationConfig = [
   },
   {
     type: "groupHeader",
-    groupTitle: "User register list",
+    groupTitle: "Register User list",
   },
   {
     id: "registerUserList",
-    title: "User list ",
+    title: "User-List ",
     type: "item",
     icon: <Icon.ArrowRight size={12} />,
     permissions: ["admin", "editor"],
@@ -65,8 +65,12 @@ const navigationConfig = [
     navLink: "/app/brahmaand/resource/userResourceList",
   },
   {
+    type: "groupHeader",
+    groupTitle: "Commented Resource ",
+  },
+  {
     id: "ResourceComment",
-    title: "List of Resource Comment  ",
+    title: "Resource Commented  ",
     type: "item",
     icon: <Icon.ArrowRight size={12} />,
     permissions: ["admin", "editor"],
