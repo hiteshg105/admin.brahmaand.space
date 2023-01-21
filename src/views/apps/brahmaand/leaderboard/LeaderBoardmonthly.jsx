@@ -44,7 +44,7 @@ class LeaderBoardList extends React.Component {
         headerName: "S.No",
         valueGetter: "node.rowIndex + 1",
         field: "node.rowIndex + 1",
-        width: 150,
+        width: 80,
         pinned: window.innerWidth > 992 ? "left" : false,
         // filter: true,
         // checkboxSelection: true,
@@ -53,9 +53,9 @@ class LeaderBoardList extends React.Component {
       },
       {
         headerName: "Name",
-        field: "username",
+        field: "Username",
         // filter: true,
-        width: 150,
+        width: 130,
         // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
@@ -68,14 +68,14 @@ class LeaderBoardList extends React.Component {
 
       {
         headerName: "Current Month Point",
-        field: "meteors",
+        field: "crrntMonth",
         // filter: true,
         width: 150,
         // pinned: window.innerWidth > 992 ? "left" : false,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data?.meteors}</span>
+              <span>{params?.data?.crrntMonth}</span>
             </div>
           );
         },
@@ -109,34 +109,50 @@ class LeaderBoardList extends React.Component {
           );
         },
       },
-      //   {
-      //     headerName: "Planet Position",
-      //     field: "desc",
-      //     // filter: true,
-      //     width: 150,
-      //     // pinned: window.innerWidth > 992 ? "left" : false,
-      //     cellRendererFramework: (params) => {
-      //       return (
-      //         <div className="d-flex align-items-center cursor-pointer">
-      //           <span>{params.data.desc}</span>
-      //         </div>
-      //       );
-      //     },
-      //   },
-      //   {
-      //     headerName: "Amount",
-      //     field: "desc",
-      //     // filter: true,
-      //     width: 150,
-      //     // pinned: window.innerWidth > 992 ? "left" : false,
-      //     cellRendererFramework: (params) => {
-      //       return (
-      //         <div className="d-flex align-items-center cursor-pointer">
-      //           <span>{params.data.desc}</span>
-      //         </div>
-      //       );
-      //     },
-      //   },
+      {
+        headerName: "Email",
+        field: "email",
+        // filter: true,
+        width: 150,
+        // pinned: window.innerWidth > 992 ? "left" : false,
+        cellRendererFramework: (params) => {
+          return (
+            <span className=" d-flex align-items-center cursor-pointer w-50 h-50 rounded">
+              {params.data?.userid?.email}
+            </span>
+          );
+        },
+      },
+      {
+        headerName: "Planet Position",
+        field: "crntmnth_planetImg",
+        // filter: true,
+        width: 150,
+        // pinned: window.innerWidth > 992 ? "left" : false,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <span style={{ width: "25px" }}>
+                <img width={40} src={params?.data?.crntmnth_planetImg} />
+              </span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Winner Image",
+        field: "crntmnth_winnerImg",
+        // filter: true,
+        width: 150,
+        // pinned: window.innerWidth > 992 ? "left" : false,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <img width={40} src={params?.data?.crntmnth_winnerImg} />
+            </div>
+          );
+        },
+      },
 
       //   {
       //     headerName: "Actions",
