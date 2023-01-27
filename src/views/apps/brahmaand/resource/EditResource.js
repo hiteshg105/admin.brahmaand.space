@@ -37,8 +37,8 @@ export default class EditResource extends Component {
       resTitle: "",
       sub_category: "",
       sub_categoryshow: "",
-      status: "",
-      aprv_status: "",
+      status: "Active",
+      // aprv_status: "",
       img: "",
       getallcat: [],
       getallsub: [],
@@ -128,6 +128,7 @@ export default class EditResource extends Component {
       });
   }
   changeHandler1 = (e) => {
+    console.log(e.target.value);
     this.setState({ status: e.target.value });
   };
 
@@ -141,10 +142,11 @@ export default class EditResource extends Component {
     axiosConfig
       .post(`/admin/edit_promotion/${id}`, this.state)
       .then((response) => {
-        console.log(response);
+        if (response.data.message == "success") {
+          swal("Submitted Successfully!", "Success");
 
-        swal("Submitted Successfully!", "Success");
-        // this.props.history.push("/app/brahmaand/resource/resourceList");
+          this.props.history.push("/app/brahmaand/resource/resourceList");
+        }
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -156,14 +158,14 @@ export default class EditResource extends Component {
     let { id } = this.props.match.params;
 
     axiosConfig
-      .post(`/admin/approve_submit_resrc/${id}`, this.state)
+      .post(`/admin/edit_promotion/${id}`, this.state)
       .then((response) => {
         console.log(response);
-        if (response.data.data.status == "Deactive") {
+        if (response.data.message == "success") {
           swal("Submitted Successfully!", "Deactived");
           this.props.history.push("/app/brahmaand/resource/resourceList");
         }
-        if (response.data.data.status == "Active") {
+        if (response.data.message == "success") {
           swal("Submitted Successfully!", "Actived");
           this.props.history.push("/app/brahmaand/resource/resourceList");
         }
@@ -492,9 +494,10 @@ export default class EditResource extends Component {
                       onChange={this.changeHandler1}
                     >
                       <input
+                        // defaultChecked
                         style={{ marginRight: "3px" }}
                         type="radio"
-                        name="aprv_status"
+                        name="status"
                         value="Active"
                       />
                       <span style={{ marginRight: "20px" }}>Active</span>
@@ -502,7 +505,7 @@ export default class EditResource extends Component {
                       <input
                         style={{ marginRight: "3px" }}
                         type="radio"
-                        name="aprv_status"
+                        name="status"
                         value="Deactive"
                       />
                       <span style={{ marginRight: "3px" }}>Deactive</span>
