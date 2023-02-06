@@ -27,7 +27,7 @@ function Updatemetors() {
 
   const getallplanetdata = () => {
     axios
-      .get(`http://3.7.173.138:9000/user/user_planet_position`)
+      .get(`http://15.207.117.200:9000/user/user_planet_position`)
       .then((res) => {
         setPlanetmetors(res.data.data);
       })
