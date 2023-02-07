@@ -20,7 +20,7 @@ function EditPlanet() {
     ) {
       axios
         .post(
-          `http://15.207.117.200:9000/admin/edit_planet_position/${Params.id}`,
+          `https://15.207.117.200:9000/admin/edit_planet_position/${Params.id}`,
           {
             point_range: meteors,
             doller_rupees: dollar,

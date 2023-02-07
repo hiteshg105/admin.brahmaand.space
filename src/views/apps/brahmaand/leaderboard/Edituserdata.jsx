@@ -15,7 +15,7 @@ function Edituserdata() {
     // e.preventDefault();
 
     axios
-      .post(`http://15.207.117.200:9000/admin/payout/${Params.id}`, {
+      .post(`https://15.207.117.200:9000/admin/payout/${Params.id}`, {
         payout: dollar,
       })
       .then((res) => {

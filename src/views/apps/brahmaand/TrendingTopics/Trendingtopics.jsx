@@ -11,7 +11,7 @@ function Trendingtopics() {
     console.log(id);
     if (id !== "") {
       axios
-        .get(`http://15.207.117.200:9000/admin/dltTrending/${id}`)
+        .get(`https://15.207.117.200:9000/admin/dltTrending/${id}`)
         .then((res) => {
           console.log(res.data.message);
           if (res.data.message == "deleted") {
@@ -26,7 +26,7 @@ function Trendingtopics() {
 
   const gettrendingdata = () => {
     axios
-      .get(`http://15.207.117.200:9000/admin/getTrending`)
+      .get(`https://15.207.117.200:9000/admin/getTrending`)
       .then((res) => {
         console.log(res.data.data);
         setTrendingsearch(res.data.data);
@@ -43,7 +43,7 @@ function Trendingtopics() {
   const handletopicsubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`http://15.207.117.200:9000/admin/addTrending`, {
+      .post(`https://15.207.117.200:9000/admin/addTrending`, {
         topics: trendingTopics.toLowerCase(),
       })
       .then((res) => {
