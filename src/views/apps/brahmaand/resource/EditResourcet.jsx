@@ -105,7 +105,7 @@ function AddResource() {
 
   const getOnelistResoure = () => {
     axios
-      .get(`https://15.207.117.200:9000/admin/getone_reslist/${Params.id}`)
+      .get(`http://15.207.117.200:9000/admin/getone_reslist/${Params.id}`)
       .then((res) => {
         console.log(res.data.data);
         setComment(res.data.data.comment);
@@ -162,7 +162,7 @@ function AddResource() {
     );
 
     // axios
-    //   .post(`https://15.207.117.200:9000/admin/edit_promotion/${Params.id}`, {
+    //   .post(`http://15.207.117.200:9000/admin/edit_promotion/${Params.id}`, {
     //     link: link,
     //     category: category,
     //     sub_category: sub_category,
@@ -193,7 +193,7 @@ function AddResource() {
     console.log(status);
     axios
       .post(
-        `https://15.207.117.200:9000/admin/approve_submit_resrc/${Params.id}`,
+        `http://15.207.117.200:9000/admin/approve_submit_resrc/${Params.id}`,
         {
           aprv_status: status,
         }
@@ -229,7 +229,7 @@ function AddResource() {
   const listbycategorydata = () => {
     if (category !== "" && category !== undefined && category !== null) {
       axios
-        .get(`https://15.207.117.200:9000/admin/listbycategory/${category}`)
+        .get(`http://15.207.117.200:9000/admin/listbycategory/${category}`)
         .then((response) => {
           console.log(response);
           setSub_categoryT(response.data.data);
