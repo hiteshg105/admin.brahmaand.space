@@ -138,7 +138,7 @@ function AddResource() {
     // );
 
     axios
-      .post(`http://13.233.99.196:9000/admin/admin_Sub_resrc`, formdata)
+      .post(`http://65.1.135.77:9000/admin/admin_Sub_resrc`, formdata)
 
       .then((response) => {
         console.log(response.data);
@@ -180,7 +180,7 @@ function AddResource() {
   const listbycategorydata = () => {
     if (category !== "" && category !== undefined && category !== null) {
       axios
-        .get(`http://13.233.99.196:9000/admin/listbycategory/${category}`)
+        .get(`http://65.1.135.77:9000/admin/listbycategory/${category}`)
         .then((response) => {
           console.log(response);
           setSub_categoryT(response.data.data);
