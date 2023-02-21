@@ -15,7 +15,7 @@ function Edituserdata() {
     // e.preventDefault();
 
     axios
-      .post(`http://65.1.135.77:9000/admin/payout/${Params.id}`, {
+      .post(`https://backend.brahmaand.space/admin/payout/${Params.id}`, {
         payout: dollar,
       })
       .then((res) => {

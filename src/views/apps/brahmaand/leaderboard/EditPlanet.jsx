@@ -20,7 +20,7 @@ function EditPlanet() {
     ) {
       axios
         .post(
-          `http://65.1.135.77:9000/admin/edit_planet_position/${Params.id}`,
+          `https://backend.brahmaand.space/admin/edit_planet_position/${Params.id}`,
           {
             point_range: meteors,
             doller_rupees: dollar,

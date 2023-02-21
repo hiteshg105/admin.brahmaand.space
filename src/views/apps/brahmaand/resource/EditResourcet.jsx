@@ -105,7 +105,7 @@ function AddResource() {
 
   const getOnelistResoure = () => {
     axios
-      .get(`http://65.1.135.77:9000/admin/getone_reslist/${Params.id}`)
+      .get(`https://backend.brahmaand.space/admin/getone_reslist/${Params.id}`)
       .then((res) => {
         console.log(res.data.data);
         setComment(res.data.data.comment);
@@ -162,7 +162,7 @@ function AddResource() {
     );
 
     // axios
-    //   .post(`http://65.1.135.77:9000/admin/edit_promotion/${Params.id}`, {
+    //   .post(`https://backend.brahmaand.space/admin/edit_promotion/${Params.id}`, {
     //     link: link,
     //     category: category,
     //     sub_category: sub_category,
@@ -192,9 +192,12 @@ function AddResource() {
     e.preventDefault();
     console.log(status);
     axios
-      .post(`http://65.1.135.77:9000/admin/approve_submit_resrc/${Params.id}`, {
-        aprv_status: status,
-      })
+      .post(
+        `https://backend.brahmaand.space/admin/approve_submit_resrc/${Params.id}`,
+        {
+          aprv_status: status,
+        }
+      )
       .then((response) => {
         console.log(response);
         if (response.data.data.aprv_status == "Deactive") {
@@ -226,7 +229,7 @@ function AddResource() {
   const listbycategorydata = () => {
     if (category !== "" && category !== undefined && category !== null) {
       axios
-        .get(`http://65.1.135.77:9000/admin/listbycategory/${category}`)
+        .get(`https://backend.brahmaand.space/admin/listbycategory/${category}`)
         .then((response) => {
           console.log(response);
           setSub_categoryT(response.data.data);
