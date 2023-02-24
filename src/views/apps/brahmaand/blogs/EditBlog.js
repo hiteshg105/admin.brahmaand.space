@@ -79,7 +79,7 @@ export default class EditBlog extends Component {
   submitHandler = (e) => {
     e.preventDefault();
     let { id } = this.props.match.params;
-    debugger;
+    console.log(this.state.status);
 
     const data = new FormData();
     data.append("blog_title", this.state.blog_title);
@@ -107,7 +107,7 @@ export default class EditBlog extends Component {
       .then((response) => {
         console.log(response);
         if (response.data.message == "success") {
-          swal("Success!", "Submitted SuccessFull!", "success");
+          swal("Success!", "Submitted SuccessFully!", "success");
           this.props.history.push("/app/brahmaand/blogs/blogList");
         }
       })
@@ -251,22 +251,19 @@ export default class EditBlog extends Component {
                     </Label>
                     <div
                       className="form-label-group"
-                      onChange={this.changeHandler1}
+                      // onChange={this.changeHandler1}
                     >
                       <input
-                        defaultChecked
                         style={{ marginRight: "3px" }}
                         type="radio"
-                        name="status"
-                        value="Active"
+                        onChange={() => this.setState({ status: "Active" })}
                       />
                       <span style={{ marginRight: "20px" }}>Active</span>
 
                       <input
                         style={{ marginRight: "3px" }}
                         type="radio"
-                        name="status"
-                        value="Deactive"
+                        onChange={() => this.setState({ status: "Deactive" })}
                       />
                       <span style={{ marginRight: "3px" }}>Deactive</span>
                     </div>
