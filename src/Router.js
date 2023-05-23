@@ -57,6 +57,9 @@ const UsersList = lazy(() => import("./views/apps/users/UsersList"));
 const AddUsers = lazy(() => import("./views/apps/users/AddUsers"));
 const EditUsers = lazy(() => import("./views/apps/users/EditUsers"));
 const ViewUsers = lazy(() => import("./views/apps/users/ViewUsers"));
+const warzone = lazy(() =>
+  import("./views/apps/brahmaand/resource/Warzone/WarZone")
+);
 
 //RegisterUser//
 const RegisterUserList = lazy(() =>
@@ -730,6 +733,10 @@ class AppRouter extends React.Component {
             <AppRoute
               path="/app/brahmaand/content/addContent"
               component={AddContent}
+            />
+            <AppRoute
+              path="/app/brahmaand/content/warzone"
+              component={warzone}
             />
             <AppRoute
               path="/app/brahmaand/content/editContent/:id"
