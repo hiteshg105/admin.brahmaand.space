@@ -46,6 +46,7 @@ export default class EditResource extends Component {
       getallsub: [],
       getrelYear: [],
       getalllang: [],
+      newcat: "",
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -67,20 +68,18 @@ export default class EditResource extends Component {
   onRemove(selectedList, removedItem) {}
 
   componentDidUpdate() {
-    // console.log(this.state.category);
-    const subcat = this.state.category;
-
-    if (subcat) {
-      axiosConfig
-        .get(`/admin/listbycategory/${subcat}`)
-        .then((response) => {
-          console.log(response.data.data);
-          this.setState({ getallsub: response.data.data });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
+    // const subcat = this.state.category;
+    // if (subcat) {
+    //   axiosConfig
+    //     .get(`/admin/listbycategory/${subcat}`)
+    //     .then((response) => {
+    //       console.log(response.data.data);
+    //       this.setState({ getallsub: response.data.data });
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // }
   }
   componentDidMount() {
     let { id } = this.props.match.params;
@@ -109,6 +108,15 @@ export default class EditResource extends Component {
           sub_categoryshow: response.data.data.sub_category.title,
           sub_category: response.data.data.sub_category._id,
         });
+        axiosConfig
+          .get(`/admin/listbycategory/${response.data.data.category._id}`)
+          .then((response) => {
+            console.log(response.data.data);
+            this.setState({ getallsub: response.data.data });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         console.log(error);
@@ -252,7 +260,18 @@ export default class EditResource extends Component {
                         placeholder={this.state.categoryshow}
                         // value={this.state.category}
                         className="mx-2 form-control"
-                        onChange={this.handleChange}
+                        onChange={(e) => {
+                          this.setState({ category: e.target.value });
+                          axiosConfig
+                            .get(`/admin/listbycategory/${e.target.value}`)
+                            .then((response) => {
+                              this.setState({ getallsub: response.data.data });
+                            })
+                            .catch((error) => {
+                              console.log(error);
+                            });
+                        }}
+                        // onChange={this.handleChange}
                       >
                         <option>{this.state.categoryshow}</option>
                         {this.state.getallcat?.map((allCategory) => (
