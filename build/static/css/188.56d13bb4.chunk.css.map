@@ -1,1 +1,0 @@
-{"version":3,"sources":["edituser.css"],"names":[],"mappings":"AAAA,YACE,wBAAyB,CACzB,sBAAuB,CACvB,cAAe,CACf,iBACF","file":"188.56d13bb4.chunk.css","sourcesContent":["[dir] .chip {\n  background-color: #da8946;\n  border-radius: 1.428rem;\n  padding: 0 10px;\n  margin-bottom: 5px;\n}\n"]}
