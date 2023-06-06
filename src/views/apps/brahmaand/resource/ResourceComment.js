@@ -171,7 +171,7 @@ class ResourceComment extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig.get(`admin/admin_comment_list`).then((response) => {
+    await axiosConfig.get(`/admin/admin_comment_list`).then((response) => {
       const rowData = response.data.data;
       // console.log(rowData);
       this.setState({ rowData });
