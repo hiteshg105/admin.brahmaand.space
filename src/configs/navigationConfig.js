@@ -69,7 +69,7 @@ const navigationConfig = [
     groupTitle: "Content Creator list ",
   },
   {
-    id: "User ResourceList",
+    id: "content creator",
     title: "List of User Content Creator Resource   ",
     type: "item",
     icon: <Icon.ArrowRight size={12} />,

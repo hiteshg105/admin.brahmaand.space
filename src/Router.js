@@ -113,6 +113,9 @@ const ViewResource = lazy(() =>
 const UserResourceList = lazy(() =>
   import("./views/apps/brahmaand/resource/UserResourceList")
 );
+const UserContentCreatoeList = lazy(() =>
+  import("./views/apps/brahmaand/ContentCreator/ContentCreatorlist")
+);
 const ResourceComment = lazy(() =>
   import("./views/apps/brahmaand/resource/ResourceComment")
 );
@@ -1588,6 +1591,11 @@ class AppRouter extends React.Component {
               exact={true}
               path="/extensions/pagination"
               component={reactPaginate}
+            />
+            <AppRoute
+              exact={true}
+              path="/app/brahmaand/resource/userContentCreator"
+              component={UserContentCreatoeList}
             />
             <AppRoute component={error404} fullLayout />
           </Switch>
