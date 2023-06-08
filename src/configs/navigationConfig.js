@@ -66,6 +66,18 @@ const navigationConfig = [
   },
   {
     type: "groupHeader",
+    groupTitle: "Content Creator list ",
+  },
+  {
+    id: "User ResourceList",
+    title: "List of User Content Creator Resource   ",
+    type: "item",
+    icon: <Icon.ArrowRight size={12} />,
+    permissions: ["admin", "editor"],
+    navLink: "/app/brahmaand/resource/userContentCreator",
+  },
+  {
+    type: "groupHeader",
     groupTitle: "Commented Resource ",
   },
   {
