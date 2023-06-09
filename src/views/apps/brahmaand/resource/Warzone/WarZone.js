@@ -22,6 +22,10 @@ import draftToHtml from "draftjs-to-html";
 import "react-toastify/dist/ReactToastify.css";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../../../../../assets/scss/plugins/extensions/editor.scss";
+import DateTimePicker from "react-datetime-picker";
+import "react-datetime-picker/dist/DateTimePicker.css";
+import "react-calendar/dist/Calendar.css";
+import "react-clock/dist/Clock.css";
 
 function WarZone() {
   const [category, setCategory] = useState("");
@@ -363,23 +367,34 @@ function WarZone() {
                   <FormGroup>
                     <Label>Start Date</Label>
 
-                    <CustomInput
+                    <DateTimePicker
+                      // className="form-control"
+                      onChange={(e) => setStartDate(e)}
+                      value={startDate}
+                    />
+
+                    {/* <CustomInput
                       type="date"
                       onChange={(e) => setStartDate(e.target.value)}
                       value={startDate}
                       className="form-control"
-                    ></CustomInput>
+                    ></CustomInput> */}
                   </FormGroup>
                 </Col>
                 <Col lg="4" md="4" className="mb-2">
                   <FormGroup>
                     <Label>End Date</Label>
-                    <CustomInput
+                    <DateTimePicker
+                      // className="form-control"
+                      onChange={(e) => setEndDate(e)}
+                      value={endDate}
+                    />
+                    {/* <CustomInput
                       type="date"
                       onChange={(e) => setEndDate(e.target.value)}
                       value={endDate}
                       className="form-control"
-                    ></CustomInput>
+                    ></CustomInput> */}
                   </FormGroup>
                 </Col>
                 <Col lg="4" md="4" className="mb-2">
