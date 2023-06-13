@@ -88,6 +88,18 @@ const navigationConfig = [
     permissions: ["admin", "editor"],
     navLink: "/app/brahmaand/resource/resourceComment",
   },
+  {
+    type: "groupHeader",
+    groupTitle: "Commented Content ",
+  },
+  {
+    id: "ContentComment",
+    title: "Content Comment  ",
+    type: "item",
+    icon: <Icon.ArrowRight size={12} />,
+    permissions: ["admin", "editor"],
+    navLink: "/app/brahmaand/content/contentComment",
+  },
   // {
   //   type: "groupHeader",
   //   groupTitle: "Add sponsor ",

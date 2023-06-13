@@ -119,6 +119,9 @@ const UserContentCreatoeList = lazy(() =>
 const ResourceComment = lazy(() =>
   import("./views/apps/brahmaand/resource/ResourceComment")
 );
+const ContentComment = lazy(() =>
+  import("./views/apps/brahmaand/ContentCreator/ContentComment")
+);
 const EditUserResource = lazy(() =>
   import("./views/apps/brahmaand/resource/EditUserResource")
 );
@@ -685,6 +688,10 @@ class AppRouter extends React.Component {
             <AppRoute
               path="/app/brahmaand/resource/resourceComment"
               component={ResourceComment}
+            />
+            <AppRoute
+              path="/app/brahmaand/content/contentComment"
+              component={ContentComment}
             />
             <AppRoute
               path="/app/brahmaand/resource/editUserResource/:id"
