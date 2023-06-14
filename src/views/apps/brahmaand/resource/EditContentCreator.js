@@ -18,8 +18,8 @@ import swal from "sweetalert";
 import Accordion from "react-bootstrap/Accordion";
 import { FiArrowDown } from "react-icons/fi";
 
-const BASE_URL = "http://localhost:9000/";
-// const BASE_URL = "https://backend.brahmaand.space"
+// const BASE_URL = "http://localhost:9000/";
+const BASE_URL = "https://backend.brahmaand.space";
 
 export default class EditContentCreator extends Component {
   constructor(props) {
@@ -68,24 +68,24 @@ export default class EditContentCreator extends Component {
       });
     // }
   };
-  //   componentDidUpdate() {
-  //     console.log("first");
-  //     // console.log(this.state.category);
-  //     const subcat = this.state.category;
-  //     // console.log(subcat);
-  //     // this.getCategory(subcat);
-  //     if (subcat) {
-  //       axiosConfig
-  //         .get(`/admin/listbycategory/${subcat}`)
-  //         .then((response) => {
-  //           console.log(response.data.data);
-  //           this.setState({ getallsub: response.data.data });
-  //         })
-  //         .catch((error) => {
-  //           console.log(error);
-  //         });
-  //     }
-  //   }
+  componentDidUpdate() {
+    console.log("first");
+    // console.log(this.state.category);
+    const subcat = this.state.category;
+    // console.log(subcat);
+    // this.getCategory(subcat);
+    if (subcat) {
+      axiosConfig
+        .get(`/admin/listbycategory/${subcat}`)
+        .then((response) => {
+          console.log(response.data.data);
+          this.setState({ getallsub: response.data.data });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }
   componentDidMount() {
     // console.log("first")
     let { id } = this.props.match.params;
@@ -155,8 +155,8 @@ export default class EditContentCreator extends Component {
     axiosConfig
       .put(`/content/update/admin/${id}`, this.state)
       .then((response) => {
-        console.log(response)
-        if (response.data.message == "success") {
+        console.log(response);
+        if (response.data.status === true) {
           swal("Submitted Successfully!", "Success");
 
           this.props.history.push("/app/brahmaand/resource/userContentCreator");
@@ -465,7 +465,7 @@ export default class EditContentCreator extends Component {
                             style={{ borderRadius: "15px" }}
                             className="mx-3"
                             height={160}
-                            src={this.state.img}
+                            src={`${BASE_URL}${this.state.img}`}
                             alt="uploaded Image"
                           />
                         </Row>
