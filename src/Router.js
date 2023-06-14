@@ -60,6 +60,9 @@ const ViewUsers = lazy(() => import("./views/apps/users/ViewUsers"));
 const warzone = lazy(() =>
   import("./views/apps/brahmaand/resource/Warzone/WarZone")
 );
+const warzoneList = lazy(() =>
+  import("./views/apps/brahmaand/resource/Warzone/WarzoneList")
+);
 
 //RegisterUser//
 const RegisterUserList = lazy(() =>
@@ -124,6 +127,9 @@ const ContentComment = lazy(() =>
 );
 const EditUserResource = lazy(() =>
   import("./views/apps/brahmaand/resource/EditUserResource")
+);
+const EditUserResourceContent = lazy(() =>
+  import("./views/apps/brahmaand/resource/EditContentCreator")
 );
 const EditComment = lazy(() =>
   import("./views/apps/brahmaand/resource/EditComment")
@@ -696,6 +702,10 @@ class AppRouter extends React.Component {
             <AppRoute
               path="/app/brahmaand/resource/editUserResource/:id"
               component={EditUserResource}
+            />
+            <AppRoute
+              path="/app/brahmaand/resource/editcontentCreator/:id"
+              component={EditUserResourceContent}
             />
             <AppRoute
               path="/app/brahmaand/resource/resourceList"
@@ -1603,6 +1613,11 @@ class AppRouter extends React.Component {
               exact={true}
               path="/app/brahmaand/resource/userContentCreator"
               component={UserContentCreatoeList}
+            />
+            <AppRoute
+              exact={true}
+              path="/app/brahmaand/warzone/list"
+              component={warzoneList}
             />
             <AppRoute component={error404} fullLayout />
           </Switch>

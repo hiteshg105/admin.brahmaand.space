@@ -181,26 +181,26 @@ class ContentCreatorlist extends React.Component {
             >
               <Route
                 render={({ history }) => (
-                  <Switch
-                    height={20}
-                    width={40}
-                    // className="mt-1"
-                    id="exampleSwitch"
-                    checked={params.data.status === "Active" ? true : false}
-                    onChange={(e) => {
-                      this.updateContent(params.data._id, e);
-                    }}
-                    color="primary"
-                  />
-                  // <Edit
-                  //   className="mr-50"
-                  //   color="blue"
-                  //   // onClick={() =>
-                  //   //   history.push(
-                  //   //     `/app/brahmaand/resource/editUserResource/${params.data._id}`
-                  //   //   )
-                  //   // }
+                  // <Switch
+                  //   height={20}
+                  //   width={40}
+                  //   // className="mt-1"
+                  //   id="exampleSwitch"
+                  //   checked={params.data.status === "Active" ? true : false}
+                  //   onChange={(e) => {
+                  //     this.updateContent(params.data._id, e);
+                  //   }}
+                  //   color="primary"
                   // />
+                  <Edit
+                    className="mr-50"
+                    color="blue"
+                    onClick={() =>
+                      history.push(
+                        `/app/brahmaand/resource/editcontentCreator/${params.data._id}`
+                      )
+                    }
+                  />
                 )}
               />
 

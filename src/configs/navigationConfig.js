@@ -155,6 +155,14 @@ const navigationConfig = [
     navLink: "/app/brahmaand/content/warzone",
   },
   {
+    id: "WarzoneList",
+    title: "WarZone List",
+    type: "item",
+    icon: <Icon.ArrowRight size={12} />,
+    permissions: ["admin", "editor"],
+    navLink: "/app/brahmaand/warzone/list",
+  },
+  {
     type: "groupHeader",
     groupTitle: "LeaderBoard",
   },
