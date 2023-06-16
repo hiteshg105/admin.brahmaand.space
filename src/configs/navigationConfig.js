@@ -164,6 +164,26 @@ const navigationConfig = [
   },
   {
     type: "groupHeader",
+    groupTitle: "Content WarZone",
+  },
+  {
+    id: "ContentWarzone",
+    title: "Content WarZone ",
+    type: "item",
+    icon: <Icon.ArrowRight size={12} />,
+    permissions: ["admin", "editor"],
+    navLink: "/app/brahmaand/content/add/warzone",
+  },
+  {
+    id: "ContentWarzoneList",
+    title: "Content WarZone List",
+    type: "item",
+    icon: <Icon.ArrowRight size={12} />,
+    permissions: ["admin", "editor"],
+    navLink: "/app/brahmaand/content/creator/warzone/list",
+  },
+  {
+    type: "groupHeader",
     groupTitle: "LeaderBoard",
   },
   {
