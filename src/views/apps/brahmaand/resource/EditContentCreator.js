@@ -41,7 +41,7 @@ export default class EditContentCreator extends Component {
       resTitle: "",
       sub_category: "",
       sub_categoryshow: "",
-      status: "Active",
+      status: "",
       // aprv_status: "",
       img: "",
       getallcat: [],

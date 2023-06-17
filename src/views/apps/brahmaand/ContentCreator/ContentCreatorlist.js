@@ -221,7 +221,7 @@ class ContentCreatorlist extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig.get(`get_all/content/creator`).then((response) => {
+    await axiosConfig.get(`/get_all/content/creator`).then((response) => {
       const rowData = response.data.data;
       //   console.log(rowData);
       this.setState({ rowData });
