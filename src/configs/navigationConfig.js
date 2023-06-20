@@ -184,6 +184,26 @@ const navigationConfig = [
   },
   {
     type: "groupHeader",
+    groupTitle: "Slider",
+  },
+  {
+    id: "slider",
+    title: "Slider",
+    type: "item",
+    icon: <Icon.ArrowRight size={12} />,
+    permissions: ["admin", "editor"],
+    navLink: "/app/brahmaand/add/slider",
+  },
+  {
+    id: "SliderList",
+    title: "List of Slider",
+    type: "item",
+    icon: <Icon.ArrowRight size={12} />,
+    permissions: ["admin", "editor"],
+    navLink: "/app/brahmaand/list/slider",
+  },
+  {
+    type: "groupHeader",
     groupTitle: "LeaderBoard",
   },
   {

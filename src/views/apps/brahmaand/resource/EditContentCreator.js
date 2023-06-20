@@ -465,7 +465,7 @@ export default class EditContentCreator extends Component {
                             style={{ borderRadius: "15px" }}
                             className="mx-3"
                             height={160}
-                            src={`${BASE_URL}${this.state.img}`}
+                            src={`${this.state.img}`}
                             alt="uploaded Image"
                           />
                         </Row>

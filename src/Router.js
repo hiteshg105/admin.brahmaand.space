@@ -69,6 +69,15 @@ const Contentwarzone = lazy(() =>
 const ContentwarzoneList = lazy(() =>
   import("./views/apps/brahmaand/resource/Warzone/ContentWarZoneList")
 );
+const CreateSlider = lazy(() =>
+  import("./views/apps/brahmaand/slider/CreateSlider")
+);
+const SliderLisst = lazy(() =>
+  import("./views/apps/brahmaand/slider/ListofSlider")
+);
+const EditSlider = lazy(() =>
+  import("./views/apps/brahmaand/slider/EditSlider")
+);
 
 //RegisterUser//
 const RegisterUserList = lazy(() =>
@@ -1634,6 +1643,21 @@ class AppRouter extends React.Component {
               exact={true}
               path="/app/brahmaand/content/creator/warzone/list"
               component={ContentwarzoneList}
+            />
+            <AppRoute
+              exact={true}
+              path="/app/brahmaand/add/slider"
+              component={CreateSlider}
+            />
+            <AppRoute
+              exact={true}
+              path="/app/brahmaand/list/slider"
+              component={SliderLisst}
+            />
+            <AppRoute
+              exact={true}
+              path="/app/brahmaand/edit/slider/:id"
+              component={EditSlider}
             />
             <AppRoute component={error404} fullLayout />
           </Switch>

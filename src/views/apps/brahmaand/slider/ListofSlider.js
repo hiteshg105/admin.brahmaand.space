@@ -16,14 +16,14 @@ import { ContextLayout } from "../../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
 import { Eye, Edit, Trash2, ChevronDown } from "react-feather";
 //import classnames from "classnames";
-import { history } from "../../../../history";
+// import { history } from "../../../../history";
 import "../../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../../assets/scss/pages/users.scss";
 import { Route } from "react-router-dom";
 import Switch from "react-switch";
 import swal from "sweetalert";
 
-class ContentCreatorlist extends React.Component {
+class ListofSlider extends React.Component {
   state = {
     rowData: [],
     aprv_status: "",
@@ -44,160 +44,61 @@ class ContentCreatorlist extends React.Component {
         width: 100,
         filter: true,
       },
+
       {
-        headerName: "Link",
-        field: "link",
+        headerName: "image",
+        field: "image",
         width: 110,
         cellRendererFramework: (params) => {
-          // console.log(params.data.link);
           return (
-            <div className="d-flex align-items-center cursor-pointer">
-              {params.data.link?.map((e, i) => (
-                <span key={i}>{e}</span>
-              ))}
-              {/* <span>{params.data.link}</span> */}
-            </div>
+            <img
+              className="w-50 h-50  rounded-circle"
+              src={`${params?.data.image}`}
+            />
           );
         },
       },
+
       {
-        headerName: "Category",
-        field: "title",
+        headerName: "sliderCount",
+        field: "Count",
         width: 110,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex  align-items-center cursor-pointer">
-              <span>{params.data.category?.title}</span>
+              <span>{params?.data.count}</span>
             </div>
           );
         },
       },
       {
-        headerName: "SubCategory",
-        field: "title",
+        headerName: "link",
+        field: "link",
         width: 110,
         cellRendererFramework: (params) => {
           return (
-            <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.sub_category?.title}</span>
+            <div className="d-flex  align-items-center cursor-pointer">
+              <span>{params?.data.link}</span>
             </div>
           );
         },
       },
 
       {
-        headerName: "Format",
-        field: "format",
-        width: 110,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="d-flex  align-items-center cursor-pointer">
-              <span>{params.data.format}</span>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Language",
-        field: "language",
-        width: 110,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="d-flex align-items-center cursor-pointer">
-              {params.data.language?.map((lang) => (
-                <span key={lang._id}>{lang?.language}</span>
-              ))}
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Image",
-        field: "img",
-        filter: true,
-        width: 110,
-        cellRendererFramework: (params) => {
-          return (
-            <img
-              className="w-50 h-50  rounded-circle"
-              src={`${params.data.img}`}
-            />
-          );
-        },
-      },
-      {
-        headerName: "Topic",
-        field: "topics",
-        width: 110,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.topics}</span>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Descripition",
-        field: "desc",
-        width: 110,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.desc}</span>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Status",
-        field: "aprv_status",
-        filter: true,
-        width: 110,
-        cellRendererFramework: (params) => {
-          //   console.log(params);
-          return params.data.status == "Active" ? (
-            <div className="badge badge-pill badge-success">
-              {params.data.status}
-            </div>
-          ) : params.data.status == "Deactive" ? (
-            <div className="badge badge-pill badge-warning">
-              {params.data.status}
-            </div>
-          ) : null;
-        },
-      },
-      {
         headerName: "Actions",
         field: "sortorder",
         width: 110,
-        display: "flex",
-        alignItems: "center",
         cellRendererFramework: (params) => {
           return (
-            <div
-              className="actions cursor-pointer d-flex align-items-center"
-              style={{ height: "50px" }}
-            >
+            <div className="actions cursor-pointer">
               <Route
                 render={({ history }) => (
-                  // <Switch
-                  //   height={20}
-                  //   width={40}
-                  //   // className="mt-1"
-                  //   id="exampleSwitch"
-                  //   checked={params.data.status === "Active" ? true : false}
-                  //   onChange={(e) => {
-                  //     this.updateContent(params.data._id, e);
-                  //   }}
-                  //   color="primary"
-                  // />
                   <Edit
                     className="mr-50"
                     color="blue"
                     onClick={() =>
                       history.push(
-                        `/app/brahmaand/resource/editcontentCreator/${params.data._id}`
+                        `/app/brahmaand/edit/slider/${params.data._id}`
                       )
                     }
                   />
@@ -221,15 +122,15 @@ class ContentCreatorlist extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig.get(`/get_all/content/creator`).then((response) => {
+    await axiosConfig.get(`/get/all/header`).then((response) => {
       const rowData = response.data.data;
-      //   console.log(rowData);
+      // console.log(rowData);
       this.setState({ rowData });
     });
   }
   async runthisfunction(id) {
-    console.log(id);
-    await axiosConfig.delete(`/content/delete/admin/${id}`).then(
+    // console.log(id);
+    await axiosConfig.delete(`/delete/header/${id}`).then(
       (response) => {
         console.log(response);
       },
@@ -237,33 +138,6 @@ class ContentCreatorlist extends React.Component {
         console.log(error);
       }
     );
-  }
-  async updateContent(id, checked) {
-    // console.log(id);
-    // console.log(checked);
-    await axiosConfig
-      .put(`/content/update/admin/${id}`, {
-        status: checked ? "Active" : "Deactive",
-      })
-      .then(
-        (response) => {
-          const me = this.state.rowData.map((row) => {
-            if (row._id === id) {
-              return {
-                ...row,
-                status: checked ? "Active" : "Deactive",
-              };
-              // console.log(row);
-            } else {
-              return row;
-            }
-          });
-          this.setState({ rowData: me });
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
   }
 
   onGridReady = (params) => {
@@ -301,21 +175,9 @@ class ContentCreatorlist extends React.Component {
             <Row className="m-2">
               <Col>
                 <h1 sm="6" className="float-left">
-                  Content Creator
+                  Slider List
                 </h1>
               </Col>
-              {/* <Col className="pt-4">
-                                    <Route
-                                        render={({ history }) => (
-                                            <Button
-                                                className=" btn btn-success float-right"
-                                                onClick={() => history.push("/app/brahmaand/resource/addResource")}
-                                            >
-                                                Add
-                                            </Button>
-                                        )}
-                                    />
-                                </Col> */}
             </Row>
             <CardBody>
               {this.state.rowData === null ? null : (
@@ -413,4 +275,4 @@ class ContentCreatorlist extends React.Component {
     );
   }
 }
-export default ContentCreatorlist;
+export default ListofSlider;
