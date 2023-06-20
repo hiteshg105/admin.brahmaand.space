@@ -27,11 +27,13 @@ export default class EditSlider extends Component {
   }
 
   async componentDidMount() {
+    console.log(this.props.match.params, "id");
     let { id } = this.props.match.params;
+
     axiosConfig
       .get(`/get/single/header/${id}`)
       .then((response) => {
-        console.log(response.data.data);
+        // console.log(response.data.data);
         this.setState({ count: response.data.data.count });
         this.setState({ link: response.data.data.link });
         this.setState({ image: response.data.data.image });
@@ -48,7 +50,6 @@ export default class EditSlider extends Component {
   //     this.setState({ [e.target.name]: e.target.value });
   //   };
 
-  //   console.log(this.state.file)
   submitHandler = (e) => {
     e.preventDefault();
     // console.log(this.state.file);
