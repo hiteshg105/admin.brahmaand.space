@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Card,
   CardBody,
@@ -32,6 +32,8 @@ function CreateSlider() {
   const [count, setCount] = useState("");
   const [link, setLink] = useState("");
 
+  const fileRef = useRef();
+
   const selectFile = (event) => {
     setFile(event.target.files[0]);
   };
@@ -48,7 +50,8 @@ function CreateSlider() {
       if (data.data.success) {
         swal("Slider Create Successfully");
         setCount("");
-        setFile(null);
+        fileRef.current.value = null;
+        // setFile(null);
         setLink("");
       } else {
         swal("Slider Already exist");
@@ -95,6 +98,7 @@ function CreateSlider() {
                   <FormGroup>
                     <Label>Slider Image</Label>
                     <input
+                      ref={fileRef}
                       type="file"
                       name="topics"
                       // placeholder=""
