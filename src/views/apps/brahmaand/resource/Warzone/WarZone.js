@@ -404,7 +404,7 @@ function WarZone() {
                     <Input
                       type="checkbox"
                       onChange={(e) => setHomePage(e.target.checked)}
-                      value={homePage}
+                      checked={homePage}
                       className="mt-1 h-25 w-25 d-flex"
                     ></Input>
                   </FormGroup>

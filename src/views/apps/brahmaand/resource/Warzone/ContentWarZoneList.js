@@ -213,19 +213,19 @@ class ContentWarZoneList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
-              {/* <Route
+              <Route
                 render={({ history }) => (
                   <Edit
                     className="mr-50"
                     color="blue"
                     onClick={() =>
                       history.push(
-                        `/app/brahmaand/resource/editUserResource/${params.data._id}`
+                        `/app/brahmaand/edit/content/creator/warzone/${params.data._id}`
                       )
                     }
                   />
                 )}
-              /> */}
+              />
 
               <Trash2
                 size={20}
@@ -245,7 +245,6 @@ class ContentWarZoneList extends React.Component {
 
   async componentDidMount() {
     await axiosConfig.get(`/get/all/creator_warzone`).then((response) => {
-      // console.log(response.data.war);
       const rowData = response.data.war;
       this.setState({ rowData });
     });

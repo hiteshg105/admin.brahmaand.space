@@ -213,19 +213,19 @@ class WarzoneList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
-              {/* <Route
+              <Route
                 render={({ history }) => (
                   <Edit
                     className="mr-50"
                     color="blue"
                     onClick={() =>
                       history.push(
-                        `/app/brahmaand/resource/editUserResource/${params.data._id}`
+                        `/app/brahmaand/edit/warzone/${params.data._id}`
                       )
                     }
                   />
                 )}
-              /> */}
+              />
 
               <Trash2
                 size={20}
@@ -289,7 +289,7 @@ class WarzoneList extends React.Component {
   render() {
     const { rowData, columnDefs, defaultColDef } = this.state;
     return (
-      console.log(rowData),
+      // console.log(rowData),
       (
         <Row className="app-user-list">
           <Col sm="12"></Col>

@@ -342,6 +342,12 @@ const EditPackagePlan = lazy(() =>
 const RefferalWalletList = lazy(() =>
   import("./views/apps/package/RefferalWalletList")
 );
+const EditWarzone = lazy(() =>
+  import("./views/apps/brahmaand/resource/Warzone/EditWarzone")
+);
+const EditWarzoneContent = lazy(() =>
+  import("./views/apps/brahmaand/resource/Warzone/EditContentWarZone")
+);
 const AddRefferalWallet = lazy(() =>
   import("./views/apps/package/AddRefferalWallet")
 );
@@ -1658,6 +1664,16 @@ class AppRouter extends React.Component {
               exact={true}
               path="/app/brahmaand/edit/slider/:id"
               component={EditSlider}
+            />
+            <AppRoute
+              exact={true}
+              path="/app/brahmaand/edit/warzone/:id"
+              component={EditWarzone}
+            />
+            <AppRoute
+              exact={true}
+              path="/app/brahmaand/edit/content/creator/warzone/:id"
+              component={EditWarzoneContent}
             />
             <AppRoute component={error404} fullLayout />
           </Switch>
