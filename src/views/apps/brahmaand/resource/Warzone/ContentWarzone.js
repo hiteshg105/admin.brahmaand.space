@@ -43,7 +43,7 @@ function ContentWarzone() {
   const [searchitem, setSearchitem] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [homePage, setHomePage] = useState("");
+  const [homePage, setHomePage] = useState(false);
 
   const onSelect = (selectedList, selectedItem) => {
     console.log(selectedList);
