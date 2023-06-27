@@ -45,6 +45,9 @@ function WarZone() {
   const [endDate, setEndDate] = useState("");
   const [homePage, setHomePage] = useState(false);
 
+
+  const [status,setStatus] =  useState("Active")
+
   const onSelect = (selectedList, selectedItem) => {
     console.log(selectedList);
     var selectItem1 = [];
@@ -107,9 +110,16 @@ function WarZone() {
           console.log(res.data.data);
         }
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
 
+  // const changeHandler1 = (e) => {
+  //   console.log(e.target.value,"status value");
+  //   this.setState({ status: e.target.value });
+
+  //   // console.log(this.status)
+  // };
+  
   const addWar = async (e) => {
     e.preventDefault();
     if (
@@ -122,6 +132,7 @@ function WarZone() {
     ) {
       const data = await axiosConfig.post(`/add/warzone`, {
         isHomePage: homePage,
+        status:status,
         category: category,
         resource1: sub_categoryp,
         resource2: sub_categorys,
@@ -397,7 +408,7 @@ function WarZone() {
                     ></CustomInput> */}
                   </FormGroup>
                 </Col>
-                <Col lg="4" md="4" className="mb-2">
+                <Col lg="2" md="2" className="mb-2">
                   <FormGroup>
                     <Label>Home Page</Label>
 
@@ -408,8 +419,40 @@ function WarZone() {
                       className="mt-1 h-25 w-25 d-flex"
                     ></Input>
                   </FormGroup>
+
                 </Col>
+                {/* <Col lg="6" md="6" sm="6" className="mb-2 mt-1"> */}
+                <Col lg="2" md="2" sm="2" className="mb-2">
+                  <Label className="mb-1">
+                    Status
+                  </Label>
+                  <div
+                    className="form-label-group"
+                    >
+                    <input
+                      defaultChecked={status}
+                      style={{ marginRight: "3px" }}
+                      type="radio"
+                      name="status"
+                      value="Active"
+                      // checked
+                      onChange={(e)=>setStatus(e.target.value)}
+                    />
+                    <span style={{ marginRight: "20px" }}>Active</span>
+
+                    <input
+                      style={{ marginRight: "3px" }}
+                      type="radio"
+                      name="status"
+                      value="Deactive"
+                      onChange={(e)=>setStatus(e.target.value)}
+                    />
+                    <span style={{ marginRight: "3px" }}>Deactive</span>
+                  </div>
+                </Col>
+                {/* </Col> */}
               </Row>
+                {console.log("status::",status)}
 
               <Row>
                 <Col>

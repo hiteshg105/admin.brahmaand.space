@@ -58,6 +58,7 @@ export default class EditSubcategory extends Component {
         this.setState({
           title: response.data.data.title,
           desc: response.data.data.desc,
+          category: response.data.data.category._id
         });
       })
       .catch((error) => {
@@ -84,8 +85,14 @@ export default class EditSubcategory extends Component {
     data.append("desc", this.state.desc);
     data.append("category", this.state.category);
 
-    if (this.state.selectedFile !== null) {
-      data.append("Subcat_img", this.state.selectedFile);
+    // if (this.state.selectedFile !== null) {
+    //   console.log(this.state.selectedFile,"jaay chek nauy")
+    //   data.append("Subcat_img", this.state.selectedFile);
+    // }
+    for (const file of this.state.selectedFile) {
+      if (this.state.selectedFile !== null) {
+        data.append("Subcat_img", file, file.name);
+      }
     }
 
     // for (var value of data.values()) {
@@ -96,7 +103,7 @@ export default class EditSubcategory extends Component {
     // }
 
     axiosConfig
-      .post(`/admin/editSubCategory/${id}`, this.state)
+      .put(`/admin/editSubCategory/${id}`, data)
       .then((response) => {
         console.log(response);
         swal("Success!", "Submitted SuccessFully!", "success");
