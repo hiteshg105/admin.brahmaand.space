@@ -44,7 +44,7 @@ function EditContentWarZone() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [homePage, setHomePage] = useState(false);
-  const [status,setStatus] =  useState("Active")
+  const [status, setStatus] = useState("Active");
 
   const params = useParams();
   const navigate = useHistory();
@@ -127,7 +127,7 @@ function EditContentWarZone() {
     ) {
       const data = await axiosConfig.put(`/update/creator_warzone/${id}`, {
         isHomePage: homePage,
-        status:status,
+        status: status,
         category: category,
         resource1: sub_categoryp,
         resource2: sub_categorys,
@@ -172,6 +172,7 @@ function EditContentWarZone() {
       setStartDate(data.data.war.startDate);
       setEndDate(data.data.war.endDate);
       setHomePage(data.data.war.isHomePage);
+      setStatus(data.data.war.status);
     }
   };
   //   console.log(homePage, "homePage");
@@ -449,29 +450,26 @@ function EditContentWarZone() {
                   </FormGroup>
                 </Col>
                 <Col lg="2" md="2" sm="2" className="mb-2">
-                  <Label className="mb-1">
-                    Status
-                  </Label>
-                  <div
-                    className="form-label-group"
-                    >
+                  <Label className="mb-1">Status</Label>
+                  <div className="form-label-group">
                     <input
-                      defaultChecked={status}
+                      checked={status === "Active"}
                       style={{ marginRight: "3px" }}
                       type="radio"
                       name="status"
                       value="Active"
                       // checked
-                      onChange={(e)=>setStatus(e.target.value)}
+                      onChange={(e) => setStatus(e.target.value)}
                     />
                     <span style={{ marginRight: "20px" }}>Active</span>
 
                     <input
                       style={{ marginRight: "3px" }}
+                      checked={status === "Deactive"}
                       type="radio"
                       name="status"
                       value="Deactive"
-                      onChange={(e)=>setStatus(e.target.value)}
+                      onChange={(e) => setStatus(e.target.value)}
                     />
                     <span style={{ marginRight: "3px" }}>Deactive</span>
                   </div>
