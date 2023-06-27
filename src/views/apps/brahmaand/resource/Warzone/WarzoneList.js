@@ -154,6 +154,27 @@ class WarzoneList extends React.Component {
           );
         },
       },
+      {
+        headerName: "Status",
+        field: "status",
+        width: 110,
+        cellRendererFramework: (params) => {
+          //   console.log(params);
+          return (
+            <div
+              style={{ marginTop: "18px" }}
+              className="d-flex align-items-center cursor-pointer"
+            >
+              <input
+                className="m-auto"
+                type="checkbox"
+                checked={params?.data.status==="Active"}
+              />
+              {/* <span>{params?.data.isStatus}</span> */}
+            </div>
+          );
+        },
+      },
       //   {
       //     headerName: "Image",
       //     field: "img",

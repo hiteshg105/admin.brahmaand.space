@@ -44,6 +44,7 @@ function EditContentWarZone() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [homePage, setHomePage] = useState(false);
+  const [status,setStatus] =  useState("Active")
 
   const params = useParams();
   const navigate = useHistory();
@@ -126,6 +127,7 @@ function EditContentWarZone() {
     ) {
       const data = await axiosConfig.put(`/update/creator_warzone/${id}`, {
         isHomePage: homePage,
+        status:status,
         category: category,
         resource1: sub_categoryp,
         resource2: sub_categorys,
@@ -434,7 +436,7 @@ function EditContentWarZone() {
                     ></CustomInput> */}
                   </FormGroup>
                 </Col>
-                <Col lg="4" md="4" className="mb-2">
+                <Col lg="2" md="2" className="mb-2">
                   <FormGroup>
                     <Label>Home Page</Label>
 
@@ -445,6 +447,34 @@ function EditContentWarZone() {
                       className="mt-1 h-25 w-25 d-flex"
                     ></Input>
                   </FormGroup>
+                </Col>
+                <Col lg="2" md="2" sm="2" className="mb-2">
+                  <Label className="mb-1">
+                    Status
+                  </Label>
+                  <div
+                    className="form-label-group"
+                    >
+                    <input
+                      defaultChecked={status}
+                      style={{ marginRight: "3px" }}
+                      type="radio"
+                      name="status"
+                      value="Active"
+                      // checked
+                      onChange={(e)=>setStatus(e.target.value)}
+                    />
+                    <span style={{ marginRight: "20px" }}>Active</span>
+
+                    <input
+                      style={{ marginRight: "3px" }}
+                      type="radio"
+                      name="status"
+                      value="Deactive"
+                      onChange={(e)=>setStatus(e.target.value)}
+                    />
+                    <span style={{ marginRight: "3px" }}>Deactive</span>
+                  </div>
                 </Col>
               </Row>
 
