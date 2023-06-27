@@ -150,6 +150,26 @@ class ContentCreatorlist extends React.Component {
         },
       },
       {
+        headerName: "Home Page",
+        field: "homePage",
+        width: 110,
+        cellRendererFramework: (params) => {
+          // console.log(params.data);
+          return (
+            <div
+              style={{ marginTop: "18px" }}
+              className="d-flex align-items-center cursor-pointer"
+            >
+              <input
+                className="m-auto"
+                type="checkbox"
+                checked={params?.data.isHomePage}
+              />
+            </div>
+          );
+        },
+      },
+      {
         headerName: "Status",
         field: "aprv_status",
         filter: true,

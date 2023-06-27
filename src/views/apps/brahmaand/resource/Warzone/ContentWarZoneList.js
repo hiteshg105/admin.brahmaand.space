@@ -244,7 +244,7 @@ class ContentWarZoneList extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig.get(`/get/all/creator_warzone`).then((response) => {
+    await axiosConfig.get(`/creator_warzone/admin`).then((response) => {
       const rowData = response.data.war;
       this.setState({ rowData });
     });

@@ -42,6 +42,7 @@ export default class EditContentCreator extends Component {
       sub_category: "",
       sub_categoryshow: "",
       status: "",
+      isHomePage: false,
       // aprv_status: "",
       img: "",
       getallcat: [],
@@ -69,7 +70,6 @@ export default class EditContentCreator extends Component {
     // }
   };
   componentDidUpdate() {
-    console.log("first");
     // console.log(this.state.category);
     const subcat = this.state.category;
     // console.log(subcat);
@@ -78,7 +78,7 @@ export default class EditContentCreator extends Component {
       axiosConfig
         .get(`/admin/listbycategory/${subcat}`)
         .then((response) => {
-          console.log(response.data.data);
+          // console.log(response.data.data);
           this.setState({ getallsub: response.data.data });
         })
         .catch((error) => {
@@ -92,7 +92,7 @@ export default class EditContentCreator extends Component {
     axiosConfig
       .get(`/content/creator/get_single_content_data/${id}`)
       .then((response) => {
-        console.log(response);
+        console.log(response.data.data.status);
         this.setState({
           desc: response.data.data.desc,
           link: response.data.data.link,
@@ -106,6 +106,8 @@ export default class EditContentCreator extends Component {
           category: response.data.data.category._id,
           sub_categoryshow: response.data.data.sub_category.title,
           sub_category: response.data.data.sub_category._id,
+          isHomePage: response.data.data.isHomePage,
+          status: response.data.data.status,
         });
       })
       .catch((error) => {
@@ -143,6 +145,10 @@ export default class EditContentCreator extends Component {
   changeHandler1 = (e) => {
     console.log(e.target.value);
     this.setState({ status: e.target.value });
+  };
+  changeHandler2 = (e) => {
+    console.log(e.checked);
+    this.setState({ isHomePage: e.checked });
   };
 
   changeHandler = (e) => {
@@ -497,14 +503,14 @@ export default class EditContentCreator extends Component {
 
               {/* <Form className="m-1 mx-2" onSubmit={this.submitHandler}> */}
               <Row>
-                <Col lg="6" md="6" sm="6" className="mb-2 mt-1">
+                <Col lg="6" md="6" sm="6" className="mt-1">
                   <Col lg="6" md="6" sm="6" className="mb-2 mt-1">
                     <Label className="mb-1">
                       <h4>Status</h4>
                     </Label>
                     <div
                       className="form-label-group"
-                      onChange={this.changeHandler1}
+                      // onChange={this.changeHandler1}
                     >
                       <input
                         // defaultChecked
@@ -512,6 +518,12 @@ export default class EditContentCreator extends Component {
                         type="radio"
                         name="status"
                         value="Active"
+                        checked={this.state.status === "Active"}
+                        onChange={(e) =>
+                          this.setState.status({
+                            status: e.target.value,
+                          })
+                        }
                       />
                       <span style={{ marginRight: "20px" }}>Active</span>
 
@@ -520,8 +532,37 @@ export default class EditContentCreator extends Component {
                         type="radio"
                         name="status"
                         value="Deactive"
+                        checked={this.state.status === "Deactive"}
+                        onChange={(e) =>
+                          this.setState.status({
+                            status: e.target.value,
+                          })
+                        }
                       />
                       <span style={{ marginRight: "3px" }}>Deactive</span>
+                    </div>
+                  </Col>
+                </Col>
+              </Row>
+              <Row>
+                <Col lg="6" md="6" sm="6" className="mb-2">
+                  <Col lg="6" md="6" sm="6" className="mb-2 mt-1">
+                    <div
+                      style={{ marginTop: "18px" }}
+                      className="align-items-start d-flex flex-column cursor-pointer"
+                    >
+                      <Label className="mb-1">
+                        <h4>Home Page</h4>
+                      </Label>
+
+                      <input
+                        className=""
+                        type="checkbox"
+                        checked={this.state.isHomePage}
+                        onChange={(e) =>
+                          this.setState({ isHomePage: e.target.checked })
+                        }
+                      />
                     </div>
                   </Col>
                 </Col>
