@@ -49,6 +49,7 @@ export default class EditContentCreator extends Component {
       getallsub: [],
       getrelYear: [],
       getalllang: [],
+      status:"Active"
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -519,25 +520,28 @@ export default class EditContentCreator extends Component {
                         name="status"
                         value="Active"
                         checked={this.state.status === "Active"}
-                        onChange={(e) =>
-                          this.setState.status({
-                            status: e.target.value,
-                          })
-                        }
+                        // onChange={(e) =>
+                        //   this.setState.status({
+                        //     status: e.target.value,
+                        //   })
+                        // }
+                        onChange={this.handleChange}
                       />
                       <span style={{ marginRight: "20px" }}>Active</span>
-
+                       
                       <input
                         style={{ marginRight: "3px" }}
                         type="radio"
                         name="status"
                         value="Deactive"
                         checked={this.state.status === "Deactive"}
-                        onChange={(e) =>
-                          this.setState.status({
-                            status: e.target.value,
-                          })
-                        }
+                        // onChange={(e) =>
+                        //   this.setState.status({
+                        //     status: e.target.value,
+                        //   })
+                        // }
+                        onChange={this.handleChange}
+
                       />
                       <span style={{ marginRight: "3px" }}>Deactive</span>
                     </div>
